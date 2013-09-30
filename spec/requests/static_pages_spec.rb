@@ -4,9 +4,9 @@ describe "StaticPages" do
   
   describe "Home page" do
     
-    it "should have the content 'Turneringer'" do
+    it "should have the content 'Forside'" do
       visit '/static_pages/home'
-      expect(page).to have_content('Turneringer')
+      expect(page).to have_content('Forside')
     end
   end
 
