@@ -1,0 +1,35 @@
+<% provide(:title, 'Ny turnering') %>
+<h1>Ny turnering</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@tournament) do |f| %>      
+      
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :start_date %>
+      <%= f.datetime_select :start_date, :minute_step => 30 %>
+
+      <%= f.label :final_date %>
+      <%= f.datetime_select :final_date, :minute_step => 30 %>
+
+      <%= f.label :deadline %>
+      <%= f.datetime_select :deadline %>
+
+      <%= f.label :entry_fee %>
+      <%= f.text_field :entry_fee %>
+
+      <%= f.label :club_id, 'Klub' %>
+      <%= f.collection_select :club_id, Club.all, :id, :name %>
+
+      <%= f.label :alternate_club_id, 'Ekstra spillested' %>
+      <%= f.collection_select :alternate_club_id, Club.all, :id, :name %>
+
+      <%= f.label :max_points %>
+      <%= f.text_field :max_points %>
+
+      <%= f.submit "Opret turnering", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

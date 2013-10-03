@@ -1,0 +1,5 @@
+<h1><%= @club.name %></h1>
+
+<% @players.each do |player| %>
+	<p><%= link_to(player.name, player) %></p>
+<% end %>

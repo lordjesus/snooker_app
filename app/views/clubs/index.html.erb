@@ -1,0 +1,5 @@
+<h1>Klubber</h1>
+
+<% @clubs.each do |club| %>
+	<p><%= link_to(club.name, club) %>, <%= club.address %>. Antal borde: <%= club.number_of_tables %></p>
+<% end %>
