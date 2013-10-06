@@ -2,3 +2,9 @@
 
 <p>Navn: <%= @tournament.name %></p>
 <p>Start: <%= @tournament.start_date %></p>
+
+<p><strong>Tilmeldte (<%= @players.count %>):</strong></p>
+
+<% @players.each do |player| %>
+	<p><%= link_to(player.name, player) %></p>
+<% end %>

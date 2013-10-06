@@ -1,5 +1,7 @@
 <h1><%= @club.name %></h1>
-
+<p><strong>Adresse:</strong> <%= @club.address %></p>
+<p><strong>Antal borde: </strong> <%= @club.number_of_tables %></p>
+<p><strong>Spillere:</strong></p>
 <% @players.each do |player| %>
 	<p><%= link_to(player.name, player) %></p>
 <% end %>

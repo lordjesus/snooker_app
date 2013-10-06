@@ -16,6 +16,7 @@ class TournamentsController < ApplicationController
 
 	def show
 		@tournament = Tournament.find(params[:id])
+		@players = @tournament.players.find(:all, :order => "ranking_points DESC")
 	end
 
 	private
