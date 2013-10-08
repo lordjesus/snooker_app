@@ -19,6 +19,10 @@ class TournamentsController < ApplicationController
 		@players = @tournament.players.find(:all, :order => "ranking_points DESC")
 	end
 
+	def index
+		@tournaments = Tournament.where(['final_date > ?', DateTime.now]).order("start_date ASC")
+	end
+
 	private
 
 	  def tournament_params

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+    belongs_to :player
 	before_save { self.email = email.downcase }
 	before_save { self.username = username.downcase }
 	before_create :create_remember_token

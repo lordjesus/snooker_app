@@ -1,0 +1,10 @@
+<% provide(:title, 'Turneringer') %>
+<h1>Turneringer</h1>
+
+<ul class="players">
+  <% @tournaments.each do |tournament| %>
+    <li>      
+      <%= link_to tournament.name, tournament %>
+    </li>    
+  <% end %>
+</ul>
