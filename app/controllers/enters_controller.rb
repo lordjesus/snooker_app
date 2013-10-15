@@ -4,7 +4,11 @@ class EntersController < ApplicationController
 		@player = Player.find(params[:enter][:player_id])
 		@tournament = Tournament.find(params[:enter][:tournament_id])
 		@player.enter!(@tournament)
-		flash[:success] = 'Du er nu tilmeldt'
+		if current_user.player == @player 
+			flash[:success] = 'Du er nu tilmeldt'
+		else
+			flash[:success] = "Du har nu tilmeldt #{@player.name}"
+		end
 		redirect_to @tournament
 	end
 
@@ -12,7 +16,11 @@ class EntersController < ApplicationController
 		@player = Player.find(params[:enter][:player_id])
 		@tournament = Tournament.find(params[:enter][:tournament_id])
 		@player.unenter!(@tournament)
-		flash[:success] = 'Du er nu afmeldt'
+		if current_user.player == @player 
+			flash[:success] = 'Du er nu afmeldt'
+		else
+			flash[:success] = "Du har nu afmeldt #{@player.name}"
+		end
 		redirect_to @tournament
 	end
 end

@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  before_action :admin_user,    only: [:new, :create, :destroy]
+
   def new
   	@player = Player.new
   end
@@ -27,5 +29,9 @@ class PlayersController < ApplicationController
 
     def player_params
     	params.require(:player).permit(:name, :club_id, :ranking_points)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user && current_user.admin?
     end
 end

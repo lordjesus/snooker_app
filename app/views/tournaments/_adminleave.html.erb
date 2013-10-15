@@ -1,0 +1,6 @@
+<%= form_for(player.enter.find_by(tournament_id: @tournament.id),
+	html: { method: :delete }) do |f| %>
+	<div><%= f.hidden_field :tournament_id %></div>
+	<div><%= f.hidden_field :player_id %></div>
+<%= f.submit "Afmeld", class: "btn" %>
+<% end %>

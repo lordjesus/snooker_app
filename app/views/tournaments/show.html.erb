@@ -3,8 +3,22 @@
 <p>Navn: <%= @tournament.name %></p>
 <p>Start: <%= @tournament.start_date %></p>
 
+<% if signed_in? && current_user.is_valid? %>
+	<% if has_joined?(@tournament) %>
+		<%= render 'leave' %>
+	<% else %>
+		<%= render 'join' %>
+	<% end %>
+<% else %>
+	<p>Log ind for at tilmelde dig</p>
+<% end %>
+
 <p><strong>Tilmeldte (<%= @players.count %>):</strong></p>
 
 <% @players.each do |player| %>
-	<p><%= link_to(player.name, player) %></p>
+	<p><%= link_to(player.name, player) %>
+		<% if is_admin?(current_user) %>
+			<%= render 'adminleave', :player => player %>
+		<% end %>
+	</p>
 <% end %>

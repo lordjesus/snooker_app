@@ -1,4 +1,6 @@
 class TournamentsController < ApplicationController
+	before_action :admin_user,    only: [:new, :create, :destroy]
+
 	def new
 		@tournament = Tournament.new 
 	end
@@ -29,4 +31,8 @@ class TournamentsController < ApplicationController
 	  	params.require(:tournament).permit(:name, :start_date, :final_date, :deadline,
 	  		:entry_fee, :club_id, :alternate_club_id, :max_points)
 	  end
+
+	  def admin_user
+        redirect_to(root_url) unless current_user && current_user.admin?
+      end
 end
