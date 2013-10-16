@@ -1,0 +1,14 @@
+<tr>
+   <td><%= user.username %></td>
+  	<td><%= user.email %></td>
+  	<td>
+  		<% if user.player == nil %>
+  			Ingen spiller
+  		<% else %>
+  			<%= link_to(user.player.name, user.player) %>
+ 		<% end %> 
+  	</td>
+   <td>
+      <%= link_to('Godkend', approve_user_path(user), { :class => 'btn btn-mini btn-success'}) %>
+   </td>
+</tr>

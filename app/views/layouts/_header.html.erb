@@ -9,6 +9,20 @@
           <li><%= link_to "Turneringer", tournaments_path %></li>
           <% if signed_in? %>
             <li><%= link_to "Users", '#' %></li>
+            <% if is_admin?(current_user) %>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Admin <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Brugere", admin_users_path %></li>
+                <li><%= link_to "Spillere", admin_players_path %></li>
+                <li><%= link_to "Turneringer", admin_tournaments_path %></li>
+                <li><%= link_to "Klubber", admin_clubs_path %></li>                
+              </ul>
+            </li>
+              
+            <% end %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
