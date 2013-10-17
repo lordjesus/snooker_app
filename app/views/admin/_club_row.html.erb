@@ -1,0 +1,8 @@
+<tr>
+   <td><%= link_to(club.name, club) %></td>
+  	<td><%= club.address %></td>
+  	<td><%= club.number_of_tables %></td>
+   <td>
+      <%= link_to('Rediger', edit_club_path(club), { :class => 'btn btn-mini'}) %>
+   </td>
+</tr>

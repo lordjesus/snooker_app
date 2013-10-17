@@ -1,9 +1,11 @@
 <% provide(:title, 'Administrer brugere') %>
 <h1>Administrer brugere</h1>
+
+
+<% if @pending_users.count > 0 %>
 <h3>Brugere der afventer godkendelse 
 	<%= '(' + @pending_users.count.to_s() + ')' unless @pending_users.count == 0 %>
 </h3>
-
 <table class="table table-striped">
 	<tr>
 		<th>Brugernavn</th>
@@ -15,6 +17,7 @@
    		<%= render 'pending_user_row', :user => user %>	
   	<% end %>
 </table>
+<% end %>
 
 <h3>Alle brugere <%= '(' + @valid_users.count.to_s() + ')' unless @valid_users.count == 0 %>
 </h3>

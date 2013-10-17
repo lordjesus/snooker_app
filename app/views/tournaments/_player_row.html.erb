@@ -1,0 +1,31 @@
+<% player = info[:player] 
+   join = info[:join] 
+   seed = info[:seed] 
+   row_class = "";
+   if seed && seed <= 8
+    row_class = "warning"
+   end
+        %>
+<tr class=<%= "#{row_class}" %>>
+  <% if seed %>
+  <td><%= seed.to_s %></td>
+  <% end %>
+   <td><%= link_to(player.name, player) %></td>
+  	<td><%= link_to(player.club.name, player.club) %></td>
+    <% if is_admin?(current_user) %>
+  	<td>
+  		<% if player.user == nil %>
+  			Ingen bruger
+  		<% else %>
+  			<%= link_to(player.user.username, player.user) %>
+ 		<% end %> 
+  	</td>
+   <td>
+      <% if join %>
+        <%= render 'join', :info => { :player => player, :btn => "btn-mini btn-success" } %>
+      <% else %>
+        <%= render 'leave', :info => { :player => player, :btn => "btn-mini" } %>
+      <% end %>
+   </td>
+   <% end %>
+</tr>

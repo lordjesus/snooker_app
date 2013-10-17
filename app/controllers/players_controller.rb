@@ -1,8 +1,21 @@
 class PlayersController < ApplicationController
   before_action :admin_user,    only: [:new, :create, :destroy]
+  before_action :correct_user,  only: [:edit, :update]
 
   def new
   	@player = Player.new
+  end
+
+  def edit
+  end
+
+  def update    
+    if @player.update_attributes(player_params)
+      flash[:success] = "Spiller opdateret"
+      redirect_to @player 
+    else
+      render 'edit'
+    end
   end
 
   def index 
@@ -33,5 +46,10 @@ class PlayersController < ApplicationController
 
     def admin_user
       redirect_to(root_url) unless current_user && current_user.admin?
+    end
+
+    def correct_user
+      @player = Player.find(params[:id])
+      redirect_to(root_url) unless current_user && (current_user?(@player.user) || current_user.admin?)
     end
 end

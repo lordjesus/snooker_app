@@ -1,0 +1,15 @@
+<% tournament = info[:tournament] 
+   can_finish = info[:can_finish] %>
+<tr>
+   <td><%= link_to(tournament.name, tournament) %></td>
+  	<td><%= tournament.deadline %></td>
+  	<td><%= tournament.start_date %></td>
+   <td>
+      <%= link_to('Rediger', edit_tournament_path(tournament), { :class => 'btn btn-mini'}) %>
+   </td>
+   <% if can_finish %>
+   <td>
+      <%= link_to('Afslut', tournament_finish_path(tournament), { :class => 'btn btn-mini btn-success'}) %>
+   </td>
+   <% end %>
+</tr>

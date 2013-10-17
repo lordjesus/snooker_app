@@ -1,2 +1,51 @@
 <% provide(:title, 'Administrer turneringer') %>
 <h1>Administrer turneringer</h1>
+
+<%= link_to('Ny turnering', new_tournament_path, class: "btn btn-large btn-primary") %>
+<br></br>
+
+<% if @current_tournaments.count > 0 %>
+	<h3>Igangværende turneringer</h3>
+	<table class="table table-striped table-condensed table-bordered">
+	<tr>
+		<th>Navn</th>
+		<th>Tilmeldingsfrist</th>
+		<th>Startdato</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @current_tournaments.each do |tournament| %>
+   		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => true } %>	
+  	<% end %>
+	</table>
+<% end %>
+
+<% if @future_tournaments.count > 0 %>
+	<h3>Kommende turneringer</h3>
+	<table class="table table-striped table-condensed table-bordered">
+	<tr>
+		<th>Navn</th>
+		<th>Tilmeldingsfrist</th>
+		<th>Startdato</th>
+		<th></th>
+	</tr>
+	<% @future_tournaments.each do |tournament| %>
+   		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
+  	<% end %>
+	</table>
+<% end %>
+
+<% if @previous_tournaments.count > 0 %>
+	<h3>Tidligere turneringer</h3>
+	<table class="table table-striped table-condensed table-bordered">
+	<tr>
+		<th>Navn</th>
+		<th>Tilmeldingsfrist</th>
+		<th>Startdato</th>
+		<th></th>
+	</tr>
+	<% @previous_tournaments.each do |tournament| %>
+   		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
+  	<% end %>
+	</table>
+<% end %>

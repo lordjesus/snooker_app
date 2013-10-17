@@ -1,0 +1,14 @@
+<tr>
+   <td><%= link_to(player.name, player) %></td>
+  	<td><%= link_to(player.club.name, player.club) %></td>
+  	<td>
+  		<% if player.user == nil %>
+  			Ingen bruger
+  		<% else %>
+  			<%= link_to(player.user.username, player.user) %>
+ 		<% end %> 
+  	</td>
+   <td>
+      <%= link_to('Rediger', edit_player_path(player), { :class => 'btn btn-mini'}) %>
+   </td>
+</tr>

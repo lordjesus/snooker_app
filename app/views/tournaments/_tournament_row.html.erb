@@ -1,0 +1,16 @@
+<% tournament = info[:tournament] %>
+<tr>
+   <td><%= link_to(tournament.name, tournament) %></td>
+  	<td><%= tournament.deadline %></td>
+  	<td><%= tournament.start_date %></td>
+   <td>
+      <%= tournament.players.count %>
+   </td>
+   <% if current_user %>
+      <% if tournament.players.include?(current_user.player) %>
+        <td class="green-text">Ja</td>
+      <% else %>
+        <td class="red-text">Nej</td>
+      <% end %>
+    <% end %>
+</tr>
