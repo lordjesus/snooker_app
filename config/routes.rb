@@ -17,7 +17,8 @@ SnookerApp::Application.routes.draw do
   match '/admin/players', to: 'admin#players',  via: 'get'
   match '/admin/clubs',   to: 'admin#clubs',    via: 'get'
   match '/admin/tournaments', to: 'admin#tournaments', via: 'get'
-  get '/tournaments/finish/:id' => 'tournaments#finish', :as => :tournament_finish
+  get '/tournaments/:id/finish' => 'tournaments#finish', :as => :tournament_finish
+  match 'tournaments/:id/finish', to: 'tournaments#done', via: ['put', 'patch', 'post']
   get "/admin/approve/:id" => "admin#approve_user", :as => :approve_user
   get "/admin/deactivate/:id" => "admin#deactivate_user", :as => :deactivate_user
   # The priority is based upon order of creation: first created -> highest priority.

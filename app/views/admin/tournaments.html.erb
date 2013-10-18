@@ -18,7 +18,10 @@
    		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => true } %>	
   	<% end %>
 	</table>
+<% else %>
+	<h2>Ingen igangværende turneringer</h2>
 <% end %>
+
 
 <% if @future_tournaments.count > 0 %>
 	<h3>Kommende turneringer</h3>
@@ -33,6 +36,9 @@
    		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
   	<% end %>
 	</table>
+<% else %>
+	<br>
+	<h2>Ingen kommende turneringer</h2>
 <% end %>
 
 <% if @previous_tournaments.count > 0 %>
@@ -48,4 +54,7 @@
    		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
   	<% end %>
 	</table>
+<% else %>
+	<br>
+	<h2>Ingen tidligere turneringer</h2>
 <% end %>

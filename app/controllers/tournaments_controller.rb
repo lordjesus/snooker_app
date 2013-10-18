@@ -6,6 +6,20 @@ class TournamentsController < ApplicationController
 	end
 
 	def finish
+		@tournament = Tournament.find(params[:id])
+		@players = @tournament.players.find(:all, :order => "ranking_points DESC")
+	end
+
+	def done
+		@tournament = Tournament.find(params[:id])
+		@tournament.finished = true
+		if @tournament.save
+			flash[:success] = 'Turnering afsluttet'
+			redirect_to @tournament
+		else
+			flash[:alert] = 'Fejl i afslutning af turnering'
+			render 'finish'
+		end
 	end
 
 	def create

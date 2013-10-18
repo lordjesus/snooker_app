@@ -10,12 +10,12 @@ class AdminController < ApplicationController
 	end
 
 	def tournaments 
-		@current_tournaments = Tournament.where(:finished => nil).where(['deadline < ?', DateTime.now])
+		@current_tournaments = Tournament.where(:finished => 0).where(['deadline < ?', DateTime.now])
 			.where(['final_date > ?', DateTime.now])
 
-		@future_tournaments = Tournament.where(:finished => nil).where(['deadline > ?', DateTime.now])
+		@future_tournaments = Tournament.where(:finished => 0).where(['deadline > ?', DateTime.now])
 
-		@previous_tournaments = Tournament.where(:finished => true)
+		@previous_tournaments = Tournament.where(:finished => 1)
 	end
 
 	def clubs

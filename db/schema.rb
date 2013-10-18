@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015232541) do
+ActiveRecord::Schema.define(version: 20131018165200) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20131015232541) do
     t.integer  "max_points"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "finished"
+    t.integer  "finished",          default: 0
   end
 
   create_table "users", force: true do |t|
