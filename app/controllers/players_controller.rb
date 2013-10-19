@@ -31,7 +31,7 @@ class PlayersController < ApplicationController
   	if @player.save
   		# Success
   		flash[:success] = "Spiller oprettet"
-  		redirect_to @player
+  		redirect_to admin_players_path
   	else
   		# Fail
   		render 'new'

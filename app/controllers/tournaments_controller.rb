@@ -8,14 +8,53 @@ class TournamentsController < ApplicationController
 	def finish
 		@tournament = Tournament.find(params[:id])
 		@players = @tournament.players.find(:all, :order => "ranking_points DESC")
+		@enters = @tournament.enter.find(:all)
 	end
 
 	def done
 		@tournament = Tournament.find(params[:id])
-		@tournament.finished = true
+		Rails.logger.info()
+		Rails.logger.info("PARAMS INSPECT: #{params.inspect}")
+		Rails.logger.info("Done")
+
+		keyList = {
+			1 => 100,
+			2 => 80,
+			3 => 64,
+			4 => 50,
+			5 => 38,
+			6 => 28,
+			7 => 23,
+			8 => 18,
+			9 => 13,
+			10 => 8,
+			11 => 3
+		}
+		
+		enters = @tournament.enter
+
+		enters.each do |enter|
+			if params["#{enter.player_id}"]["gone"]
+				enter.gone = params["#{enter.player_id}"]["gone"]
+			end
+			if !enter.gone
+				enter.rank = params["#{enter.player_id}"]["rank"]
+				if params["#{enter.player_id}"]["lost"]
+					enter.lost_all = params["#{enter.player_id}"]["lost"]
+				end
+				points = keyList[enter.rank] * @tournament.max_points / 100
+				if enter.lost_all
+					points /= 2
+				end
+				enter.points = points
+			end
+			
+			enter.save
+		end
+		@tournament.finished = 1;
 		if @tournament.save
 			flash[:success] = 'Turnering afsluttet'
-			redirect_to @tournament
+			redirect_to admin_tournaments_path
 		else
 			flash[:alert] = 'Fejl i afslutning af turnering'
 			render 'finish'

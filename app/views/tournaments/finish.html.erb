@@ -2,4 +2,90 @@
 
 <h1>Afslut turnering</h1>
 
-<%= button_to "Afslut", {}, class: "btn btn-large btn-primary", confirm: "Er du sikker?" %>
+<%= form_tag do %>
+
+  <table class="table table-striped table-condensed table-bordered">
+<thead>
+      <tr>
+        <th scope="col">Rank</th>
+        <th>Id</th>
+        <th scope="col">Spiller</th>
+        <th>Breaks</th>
+        <th>Tabt alle?</th>
+        <th>Væk</th>
+      </tr>
+  </thead>
+  <tbody class="sortable">
+  		<% i = 1
+  		@enters.each do |enter| %>
+  		
+      <tr>
+        <td class="rank"><%= i.to_s %><% i += 1 %></td>
+        <td class="id"><%= enter.player.id %></td>
+        <td><%= enter.player.name %></td>
+        <td><%= text_field_tag "#{enter.player.id}[breaks]" %></td>
+        <td><%= check_box_tag "#{enter.player.id}[lost]" %></td>
+        <td><%= check_box_tag "#{enter.player.id}[gone]" %></td>
+      </tr>
+      <% end %>
+      
+      
+  </tbody>        
+</table>
+
+
+	<%= hidden_field_tag 'end', 'true' %>
+	<%= submit_tag "Afslut", class: "btn btn-large btn-primary", confirm: "Er du sikker?" %>
+
+<% end %>
+
+
+<script>
+   var tf = function(event, ui) {
+   	 		$('table tr').each(function() {
+   	 			$(this).children('.rank').html(getPlayerRank($(this).index()+1, $(this).children('.id').text()))
+   	 		})
+       	}
+
+    var createRankString = function(id, rank) {
+    	var p = id + '[rank]';
+    	var ids = '<input id="' + p + '" name="' + 
+    		p +'" type="hidden" value="' + rank + '" />';
+    	return ids;
+    }
+
+    var getPlayerRank = function(x, id) {    	
+    	switch (true) {
+			case (x == 1):
+				return "1" + createRankString(id, "1");
+			case (x == 2):
+				return "2" + createRankString(id, "2");
+			case (x <= 4):
+				return "3-4" + createRankString(id, "3");
+			case (x <= 8):
+				return "5-8" + createRankString(id, "4");
+			case (x <= 16):
+				return "9-16" + createRankString(id, "5");
+			case (x <= 20):
+				return "17-20" + createRankString(id, "6");
+			case (x <= 24):
+				return "21-24" + createRankString(id, "7");
+			case (x <= 32):
+				return "25-32" + createRankString(id, "8");
+			case (x <= 40):
+				return "33-40" + createRankString(id, "9");
+
+			default:
+				return x;				
+		}
+    }
+  $(function() {
+    $( ".sortable" ).sortable({
+    	
+    	update: tf
+
+    });
+   
+    $( ".sortable" ).disableSelection();
+  });
+</script>
