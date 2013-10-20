@@ -11,7 +11,7 @@ class AdminController < ApplicationController
 
 	def tournaments 
 		@current_tournaments = Tournament.where(:finished => 0).where(['deadline < ?', DateTime.now])
-			.where(['final_date > ?', DateTime.now])
+			
 
 		@future_tournaments = Tournament.where(:finished => 0).where(['deadline > ?', DateTime.now])
 

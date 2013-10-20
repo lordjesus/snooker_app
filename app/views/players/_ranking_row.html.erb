@@ -1,0 +1,31 @@
+<% player = info[:player]
+   tournaments = info[:tournaments]
+   %>
+<tr>
+  <td>
+    <% if player.position < player.last_position %>
+      <%= image_tag("up-20.png", alt: "Up") %>
+    <% elsif player.position > player.last_position %>
+      <%= image_tag("down-20.png", alt: "Up") %>
+    <% else %>
+      <%= image_tag("none-20.png", alt: "Up") %>
+    <% end %>
+  </td> 
+  <td><%= player.position %></td>
+   <td><%= link_to(player.name, player) %></td>
+  	<td><%= link_to(player.club.name, player.club) %></td>
+    <% tournaments.each do |tour| %>
+      <% p = tour.enter.find_by(:player_id => player.id)
+        points = '-'
+        if p
+          points = p.points
+          if !points
+            points = '-'
+          end
+        end
+          %>
+      <td class="center-text"><%= points %></td>
+    <% end %>
+  	<td><strong><%= player.ranking_points %></strong></td>
+   
+</tr>

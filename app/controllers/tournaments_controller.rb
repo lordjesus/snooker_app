@@ -128,15 +128,17 @@ class TournamentsController < ApplicationController
 	  				player.save
 	  			end
 	  		end
-
-	  	#	players.each do |player|
-	  	#		row = enters.find_by(:player_id => player.id)
-	  	#		if (row.points)
-	  	#			player.ranking_points += row.points
-	  	#		end
-	  	#	end
 	  	end
-
+	  	# TODO: Handle cases with equal points
+	  	# by favouring the best latest result
+	  	players = players.order('ranking_points desc')
+	  	i = 1
+	  	players.each do |p|
+	  		p.last_position = p.position
+	  		p.position = i
+	  		i += 1
+	  		p.save
+	  	end
 	  end
 
 	  def tournament_params

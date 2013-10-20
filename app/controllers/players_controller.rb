@@ -20,6 +20,8 @@ class PlayersController < ApplicationController
 
   def index 
   	@players = Player.find(:all, :order => "ranking_points DESC")
+    @tournaments = Tournament.all.where(:finished => 1).order('final_date desc').limit(6).reverse
+      
   end
 
   def show
