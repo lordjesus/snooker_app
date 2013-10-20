@@ -37,22 +37,32 @@ class TournamentsController < ApplicationController
 			if params["#{enter.player_id}"]["gone"]
 				enter.gone = params["#{enter.player_id}"]["gone"]
 			end
-			if !enter.gone
+			if enter.gone == 0
 				enter.rank = params["#{enter.player_id}"]["rank"]
 				if params["#{enter.player_id}"]["lost"]
 					enter.lost_all = params["#{enter.player_id}"]["lost"]
 				end
 				points = keyList[enter.rank] * @tournament.max_points / 100
-				if enter.lost_all
+				if enter.lost_all == 1
 					points /= 2
 				end
 				enter.points = points
+
+				if params["#{enter.player.id}"]["breaks"].size > 0
+					breaks = params["#{enter.player.id}"]["breaks"].split(",").map(&:strip)
+					breaks.each do |b|
+						HighBreak.create(:player_id => enter.player.id,
+							:tournament_id => @tournament.id, :break => b.to_i)
+					end
+				end
 			end
 			
 			enter.save
 		end
+		
 		@tournament.finished = 1;
 		if @tournament.save
+			update_ranking_list
 			flash[:success] = 'Turnering afsluttet'
 			redirect_to admin_tournaments_path
 		else
@@ -101,6 +111,33 @@ class TournamentsController < ApplicationController
 	end
 
 	private
+
+	  def update_ranking_list
+	  	tournaments = Tournament.all.where(:finished => 1).order('final_date desc').limit(6).reverse
+	  	players = Player.all
+	  	players.each do |player|
+	  		player.ranking_points = 0
+	  		player.save
+	  	end
+	  	tournaments.each do |tour|
+	  		enters = tour.enter
+	  		enters.each do |row|
+	  			player = players.find(row.player_id)
+				if (row.points)
+	  				player.ranking_points += row.points
+	  				player.save
+	  			end
+	  		end
+
+	  	#	players.each do |player|
+	  	#		row = enters.find_by(:player_id => player.id)
+	  	#		if (row.points)
+	  	#			player.ranking_points += row.points
+	  	#		end
+	  	#	end
+	  	end
+
+	  end
 
 	  def tournament_params
 	  	params.require(:tournament).permit(:name, :start_date, :final_date, :deadline,
