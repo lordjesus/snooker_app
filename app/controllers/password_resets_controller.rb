@@ -17,7 +17,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(:reset_token => params[:id])
+    @user = User.find_by(:reset_token => params[:id]) unless params[:id] == nil
   end
 
   def update
@@ -26,6 +26,8 @@ class PasswordResetsController < ApplicationController
       flash[:danger] = 'Nulstillingsperioden for dette password er ophørt'
       redirect_to new_password_reset_path
     elsif @user.update_attributes(user_params)
+      @user.update_attribute(:reset_token, nil)
+      @user.update_attribute(:reset_sent_at, nil)
       flash[:success] = "Password er nu ændret!"
       redirect_to root_url 
     else
