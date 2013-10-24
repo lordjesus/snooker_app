@@ -6,6 +6,7 @@ SnookerApp::Application.routes.draw do
   resources :players
   resources :clubs
   resources :tournaments
+  resources :password_resets
   resources :enters, only: [:create, :destroy]
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'

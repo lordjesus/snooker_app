@@ -1,0 +1,11 @@
+<h1>Nulstil password</h1>
+
+<%= form_tag password_resets_path, :method => :post do %>
+<div class="row">
+  <div class="span6 offset3">
+  	<%= label_tag :email %>
+  	<%= text_field_tag :email, params[:email] %>
+  	<%= submit_tag "Nulstil password", class: "btn btn-large btn-primary"  %>
+  </div>
+</div>
+<% end %>

@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
         self.user_level == 2
     end
 
+    def send_password_reset
+        s = SecureRandom.urlsafe_base64 + DateTime.now.to_i.to_s
+        k = Digest::SHA1.hexdigest(s)
+        self.update_attribute(:reset_token, k)
+        self.update_attribute(:reset_sent_at, DateTime.now)
+        UserMailer.password_reset(self).deliver
+    end
+
     private 
 
     	def create_remember_token

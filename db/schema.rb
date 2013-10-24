@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020172502) do
+ActiveRecord::Schema.define(version: 20131023205953) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -20,6 +23,20 @@ ActiveRecord::Schema.define(version: 20131020172502) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "enter", force: true do |t|
+    t.integer  "player_id"
+    t.integer  "tournament_id"
+    t.string   "note"
+    t.integer  "rank"
+    t.boolean  "lost_all"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enter", ["player_id", "tournament_id"], name: "index_enter_on_player_id_and_tournament_id", unique: true, using: :btree
+  add_index "enter", ["player_id"], name: "index_enter_on_player_id", using: :btree
+  add_index "enter", ["tournament_id"], name: "index_enter_on_tournament_id", using: :btree
 
   create_table "enters", force: true do |t|
     t.integer  "player_id"
@@ -33,9 +50,9 @@ ActiveRecord::Schema.define(version: 20131020172502) do
     t.integer  "points"
   end
 
-  add_index "enters", ["player_id", "tournament_id"], name: "index_enters_on_player_id_and_tournament_id", unique: true
-  add_index "enters", ["player_id"], name: "index_enters_on_player_id"
-  add_index "enters", ["tournament_id"], name: "index_enters_on_tournament_id"
+  add_index "enters", ["player_id", "tournament_id"], name: "index_enters_on_player_id_and_tournament_id", unique: true, using: :btree
+  add_index "enters", ["player_id"], name: "index_enters_on_player_id", using: :btree
+  add_index "enters", ["tournament_id"], name: "index_enters_on_tournament_id", using: :btree
 
   create_table "high_breaks", force: true do |t|
     t.integer  "player_id"
@@ -81,10 +98,12 @@ ActiveRecord::Schema.define(version: 20131020172502) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.integer  "player_id"
+    t.string   "reset_token"
+    t.datetime "reset_sent_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

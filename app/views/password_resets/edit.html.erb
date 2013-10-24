@@ -1,0 +1,21 @@
+<h1>Indtast nyt password</h1>
+
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+	<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', :update => @user %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Gentag password" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Opdater password", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+    
+  </div>
+</div>
+<% end %>
