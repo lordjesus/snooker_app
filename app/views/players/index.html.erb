@@ -1,6 +1,6 @@
 <% provide(:title, 'Rangliste') %>
-<h1>Rangliste</h1>
-<table class="table table-striped table-condensed">
+
+<table class="table table-striped table-condensed small-text">
 	<thead>
 	<tr>
 		<th></th>
@@ -14,7 +14,7 @@
 	</tr>
 	</thead>
 	<tbody>
-	<% @players.each do |player| %>
+	<% @ranking_players.each do |player| %>
    		<%= render 'ranking_row', :info => {:player => player, :tournaments => @tournaments} %>	
   	<% end %>
   	</tbody>

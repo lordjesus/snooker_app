@@ -1,4 +1,4 @@
-<h1><%= @tournament.name %></h1>
+<% provide(:title, @tournament.name) %>
 
 <p>Navn: <%= @tournament.name %></p>
 <p>Start: <%= @tournament.start_date %></p>

@@ -1,0 +1,25 @@
+<% player = info[:player]   
+	pos = info[:pos]
+   %>
+
+<tr>
+<td>
+	<%= pos %>
+</td>
+<td>
+	<%= link_to player.name, player %>
+</td>
+<td>
+	<%= link_to player.club.name, player.club %>
+</td>
+<td>
+	<% player.high_break.order('break DESC').each_with_index do |b, i| 
+		if i == 0
+		%>		
+		<%= link_to b.break, b.tournament, :title => b.tournament.name %>
+		<% else %>
+		, <%= link_to b.break, b.tournament, :title => b.tournament.name %>
+		<% end %>
+	<% end %>
+</td>
+</tr>

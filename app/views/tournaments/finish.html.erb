@@ -41,7 +41,12 @@
 
 
 <script>
+  $(document).ready(function() {
+     $('input[type="submit"]').prop('disabled',true);
+     
+ });
    var tf = function(event, ui) {
+        $('input[type="submit"]').prop('disabled',false);
    	 		$('table tr').each(function() {
    	 			$(this).children('.rank').html(getPlayerRank($(this).index()+1, $(this).children('.id').text()))
    	 		})

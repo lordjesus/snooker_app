@@ -1,0 +1,18 @@
+<% provide(:title, 'Højeste breaks') %>
+<table class="table table-striped table-condensed small-text">
+	<thead>
+	<tr>		
+		<th>#</th>
+		<th>Navn</th>
+		<th>Klub</th>		
+		<th>Breaks</th>
+	</tr>
+	</thead>
+	<tbody>
+	<% pos = 1
+	 @players.each do |player| %>
+   		<%= render 'break_row', :info => { :player => player, :pos => pos } %>	
+  	<% pos = pos + 1 
+  	end %>
+  	</tbody>
+</table>

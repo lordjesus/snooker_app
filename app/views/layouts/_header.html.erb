@@ -1,14 +1,14 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "sample app", root_path, id: "logo" %>
+      <%= link_to yield(:title), root_path, id: "logo" %>
       <nav>
-        <ul class="nav">
-          <li><%= link_to "Home", root_path %></li>
+        <ul class="nav">          
           <li><%= link_to "Rangliste", players_path %></li>
+          <li><%= link_to "Breaks", breaks_path %></li>
           <li><%= link_to "Turneringer", tournaments_path %></li>
           <% if signed_in? %>
-            <li><%= link_to "Users", '#' %></li>
+            
             <% if is_admin?(current_user) %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -37,7 +37,7 @@
               </ul>
             </li>
           <% else %>
-            <li><%= link_to "Sign in", signin_path %></li>
+            <li><%= link_to "Log ind", signin_path %></li>
           <% end %>
         </ul>
       </nav>
