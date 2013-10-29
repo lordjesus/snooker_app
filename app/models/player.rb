@@ -7,6 +7,7 @@ class Player < ActiveRecord::Base
 	validates(:name, presence: true, length: { minimum: 2 },
     	uniqueness: { case_sensitive: false })
 	validates(:club_id, presence: true)
+	self.per_page = 10
 
 	def enter!(tournament) 
 		enter.create(tournament_id: tournament.id)
