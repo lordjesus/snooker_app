@@ -1,0 +1,55 @@
+<h1>Opdater profil</h1>
+<div class="span6 ">
+<%= form_for(@profile) do |f| %>
+      <%= render 'shared/error_messages', :update => @profile %>
+      
+      <%= f.label :born_year, "Fødselsår" %>
+      <%= f.text_field :born_year %>
+
+      <%= f.label :start_year, "Startet år" %>
+      <%= f.text_field :start_year %>
+
+      <%= f.label :cue, "Kø" %>
+      <%= f.text_field :cue %>
+
+      <%= f.label :training_week, "Træning om ugen, timer" %>
+      <%= f.text_field :training_week %>
+
+      <%= f.label :fav_training, "Bedste træningsdisciplin" %>
+      <%= f.text_field :fav_training %>
+
+      <%= f.label :highest_break_tournament, "Højeste serie turnering" %>
+      <%= f.text_field :highest_break_tournament %>
+
+      <%= f.label :highest_break_practice, "Højeste serie træning" %>
+      <%= f.text_field :highest_break_practice %>
+
+      <%= f.label :best_result, "Bedste resultat, beskrivelse" %>
+      <%= f.text_area :best_result, rows: 6 %>     
+
+      <%= f.label :best_match, "Bedste kamp, beskrivelse" %>
+      <%= f.text_area :best_match, rows: 6 %>   
+
+      <%= f.label :favourite_player, "Favoritspiller" %>
+      <%= f.text_area :favourite_player, rows: 3 %> 
+
+      <%= f.label :hobbies, "Andre hobbier" %>
+      <%= f.text_area :hobbies, rows: 3 %> 
+
+      <%= f.label :fav_music, "Yndlingsmusik" %>
+      <%= f.text_area :fav_music, rows: 3 %> 
+
+      <%= f.label :fav_movie, "Yndlingsfilm" %>
+      <%= f.text_area :fav_movie, rows: 3 %>
+
+      <p><strong>Valgfrit</strong></p>
+
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email %>
+
+      <%= f.label :phone, "Telefonnummer" %>
+      <%= f.text_field :phone %>        
+
+      <%= f.submit "Opdater profil", class: "btn btn-large btn-primary" %>
+    <% end %>
+</div>

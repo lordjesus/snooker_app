@@ -1,8 +1,23 @@
 <% provide(:title, 'Profil') %>
 <h1><%= @player.name %></h1>
 
-<p>Navn: <%= @player.name %></p>
-<p>Klub: <%= link_to(@player.club.name, @player.club) %></p>
+<% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user)
+	if @player.profile %>
+		<p><%= link_to 'Ændr spillerprofil', edit_profile_path(:id => @player.profile.id), class: "btn" %></p>
+	<% else %>
+		<p>Fortæl lidt om dig selv ved at udfylde en spillerprofil.</p>
+		<p><%= link_to 'Udfyld spillerprofil', new_profile_path(:player_id => @player.id), class: "btn btn-large btn-primary" %></p>
+<% end 
+end
+%>
+
+<p><strong>Navn: </strong><%= @player.name %></p>
+<p><strong>Klub: </strong><%= link_to(@player.club.name, @player.club) %></p>
+
+<% if @player.profile %>
+	<%= render 'profile', :profile => @player.profile %>
+ <% end %>
+
 <p>Ranglistepoint: <%= @player.ranking_points %></p>
 
 <% if @player.high_break.count > 0 %>

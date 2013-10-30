@@ -2,6 +2,7 @@ SnookerApp::Application.routes.draw do
   get "clubs/new"
   get "players/new"
   resources :users
+  resources :profiles
   resources :sessions, only: [:new, :create, :destroy]
   resources :players
   resources :clubs

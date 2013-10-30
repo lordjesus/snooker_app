@@ -1,0 +1,46 @@
+<img class="img-polaroid pull-right" alt="Profilbillede" src="http://snooker.dk/wp-content/uploads/2013/07/Profilbillede.jpg" width="300" height="445" />
+<% if !profile.born_year.empty? %>
+	<p><strong>Fødselsår: </strong><%= profile.born_year %></p>
+<% end %>
+<% if !profile.start_year.empty? %>
+	<p><strong>Startet år: </strong><%= profile.start_year %></p>
+<% end %>
+<% if !profile.cue.empty? %>
+	<p><strong>Kø: </strong><%= profile.cue %></p>
+<% end %>
+<% if !profile.training_week.empty? %>
+	<p><strong>Træning om ugen, timer: </strong><%= profile.training_week %></p>
+<% end %>
+<% if !profile.fav_training.empty? %>
+	<p><strong>Bedste træningsdisciplin: </strong><%= profile.fav_training %></p>
+<% end %>
+<% if !profile.highest_break_tournament.empty? %>
+	<p><strong>Højeste serie turnering: </strong><%= profile.highest_break_tournament %></p>
+<% end %>
+<% if !profile.highest_break_practice.empty? %>
+	<p><strong>Højeste serie træning: </strong><%= profile.highest_break_practice %></p>
+<% end %>
+<% if !profile.best_result.empty? %>
+	<p><strong>Bedste resultat, beskrivelse: </strong><%= profile.best_result %></p>
+<% end %>
+<% if !profile.best_match.empty? %>
+	<p><strong>Bedste kamp, beskrivelse: </strong><%= profile.best_match %></p>
+<% end %>
+<% if !profile.favourite_player.empty? %>
+	<p><strong>Favoritspiller: </strong><%= profile.favourite_player %></p>
+<% end %>
+<% if !profile.hobbies.empty? %>
+	<p><strong>Andre hobbier: </strong><%= profile.hobbies %></p>
+<% end %>
+<% if !profile.fav_music.empty? %>
+	<p><strong>Yndlingsmusik: </strong><%= profile.fav_music %></p>
+<% end %>
+<% if !profile.fav_movie.empty? %>
+	<p><strong>Yndlingsfilm: </strong><%= profile.fav_movie %></p>
+<% end %>
+<% if !profile.email.empty? %>
+	<p><strong>Email: </strong><%= profile.email %></p>
+<% end %>
+<% if !profile.phone.empty? %>
+	<p><strong>Telefonnummer: </strong><%= profile.phone %></p>
+<% end %>

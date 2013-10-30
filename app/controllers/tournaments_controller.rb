@@ -98,7 +98,7 @@ class TournamentsController < ApplicationController
 
 	def show
 		@tournament = Tournament.find(params[:id])
-		@players = @tournament.players.find(:all, :order => "ranking_points DESC")
+		@players = @tournament.players.find(:all, :order => "position ASC")
 		if @players.count > 0
 			@not_joined = Player.find(:all, :conditions => ['id not in (?)', @players.map(&:id)])
 		else
