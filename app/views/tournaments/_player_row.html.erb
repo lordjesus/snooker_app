@@ -22,9 +22,9 @@
   	</td>
    <td>
       <% if join %>
-        <%= render 'join', :info => { :player => player, :btn => "btn-mini btn-success" } %>
+        <%= render 'join', :info => { :player => player, :btn => "btn-mini btn-success", :form =>  "no-margin" } %>
       <% else %>
-        <%= render 'leave', :info => { :player => player, :btn => "btn-mini" } %>
+        <%= render 'leave', :info => { :player => player, :btn => "btn-mini " , :form =>  "no-margin" } %>
       <% end %>
    </td>
    <% end %>

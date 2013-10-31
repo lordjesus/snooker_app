@@ -32,7 +32,7 @@ end
 	</p>
 <% end %>
 
-<% if @player.enter.where('tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1)').count > 0 %>
+<% if @tournaments_played.count > 0 %>
 	<h2>Turneringer</h2>
 <table class="table table-striped table-condensed table-bordered">
 <thead>
@@ -44,7 +44,7 @@ end
 	</thead>
 	<tbody>
 
-	<% @player.enter.where('tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1)').each do |e| %>
+	<% @tournaments_played.each do |e| %>
 	<tr>
 
 		<td><%= link_to e.tournament.name, e.tournament %></td>

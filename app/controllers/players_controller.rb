@@ -27,7 +27,8 @@ class PlayersController < ApplicationController
 
   def show
   	@player = Player.find(params[:id])
-
+    @tournaments_played = @player.enter.where(
+      'tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1)').reverse
   end
 
   def create

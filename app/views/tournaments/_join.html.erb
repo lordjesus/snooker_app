@@ -1,6 +1,7 @@
 <%  player = info[:player] 
-	btn_size = info[:btn] %>
-<%= form_for(player.enter.build(tournament_id: @tournament.id)) do |f| %>
+	btn_size = info[:btn]
+	form_class = info[:form] %>
+<%= form_for(player.enter.build(tournament_id: @tournament.id), :html => { :class => "#{form_class}"}) do |f| %>
 	<div><%= f.hidden_field :tournament_id %></div>
 	<div><%= f.hidden_field :player_id %></div>
 	<%= f.submit "Tilmeld", class: "btn #{btn_size}" %>
