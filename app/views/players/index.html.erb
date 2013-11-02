@@ -6,9 +6,14 @@
 		<th></th>
 		<th>#</th>
 		<th>Navn</th>
-		<th>Klub</th>
-		<% @tournaments.each do |tour| %>
-			<th width="60"><%= link_to tour.name, tour %></th>
+		<th>Klub</th>		
+		<% @tournaments.each_with_index do |tour,i| %>
+			<th width="55" align="center" style="text-align: center;"><%= 
+			if i > 2
+				link_to image_tag('test.jpg'), tour
+			else 
+				link_to image_tag('test2.jpg'), tour
+			end %></th>
 		<% end %>
 		<th>Point</th>
 	</tr>

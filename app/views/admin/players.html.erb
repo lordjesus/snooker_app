@@ -15,9 +15,28 @@
 </thead>
 <tbody>
 	
-	<% @players.each do |player| %>
+	<% cid = 0 
+	@players.each do |player| %>
+		<% if player.club_id != cid %>
+			<tr class="header">
+			 <th colspan="4"><%= player.club.name %> <span>+</span>
+			</tr>
+		<% cid = player.club_id 
+		end %>
    		<%= render 'player_row', :player => player %>	
   	<% end %>
   	
 </tbody>
 </table>
+
+<script>
+$(document).ready(function() {
+	$('.header').nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+$('.header').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $(this).nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+</script>
