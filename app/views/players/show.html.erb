@@ -1,24 +1,20 @@
 <% provide(:title, 'Profil') %>
 <h1><%= @player.name %></h1>
+<script src="Chart.js"></script>
 
-<% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user)
-	if @player.profile %>
-		<p><%= link_to 'Opdater spillerprofil', edit_profile_path(:id => @player.profile.id), class: "btn" %></p>
-	<% else %>
-		<p>Fortæl lidt om dig selv ved at udfylde en spillerprofil.</p>
-		<p><%= link_to 'Udfyld spillerprofil', new_profile_path(:player_id => @player.id), class: "btn btn-large btn-primary" %></p>
-<% end 
-end
-%>
 
 <p><strong>Navn: </strong><%= @player.name %></p>
 <p><strong>Klub: </strong><%= link_to(@player.club.name, @player.club) %></p>
+
+<% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user) %>
+	<p><%= link_to 'Opdater oplysninger', edit_player_path(:id => @player.id), class: "btn" %></p>
+<% end %>
 
 <% if @player.profile %>
 	<%= render 'profile', :profile => @player.profile %>
  <% end %>
 
-<p>Ranglistepoint: <%= @player.ranking_points %></p>
+
 
 <% if @player.high_break.count > 0 %>
 	<p>
@@ -31,6 +27,16 @@ end
 		<% end %>
 	</p>
 <% end %>
+
+<% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user)
+	if @player.profile %>
+		<p><%= link_to 'Opdater spillerprofil', edit_profile_path(:id => @player.profile.id), class: "btn" %></p>
+	<% else %>
+		<p>Fortæl lidt om dig selv ved at udfylde en spillerprofil.</p>
+		<p><%= link_to 'Udfyld spillerprofil', new_profile_path(:player_id => @player.id), class: "btn btn-large btn-primary" %></p>
+<% end 
+end
+%>
 
 <% if @tournaments_played.count > 0 %>
 	<h2>Turneringer (<%= @tournaments_played.count %>)</h2>
@@ -56,3 +62,31 @@ end
 	</tbody>
 </table>
 <% end %>
+
+<canvas id="canvas" width="740" height="400"></canvas>
+
+<%= javascript_tag do %>
+	 var lineChartData = {
+                        labels : <%= @player.enter.map { |p| p.lost_all } %>,
+                        datasets : [                               
+                                {
+                                        fillColor : "rgba(151,187,205,0.5)",
+                                        strokeColor : "rgba(151,187,205,1)",
+                                        pointColor : "rgba(151,187,205,1)",
+                                        pointStrokeColor : "#fff",
+                                        data : <%= @player.enter.map { |p| p.rank } %>
+                                }
+                        ],
+
+                }
+
+        var lineOptions = {
+    		scaleOverride: true,
+    		scaleSteps: 10,
+    		scaleStepWidth: 1,
+    		scaleStartValue: 0,
+    		
+};       
+        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, lineOptions);
+<% end %>
+

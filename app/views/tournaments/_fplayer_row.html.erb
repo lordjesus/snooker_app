@@ -1,0 +1,25 @@
+<% enter = info[:enter]    
+   
+        %>
+<tr>
+  
+  <td><%= get_rank(enter.rank) %></td>
+  
+   <td><%= link_to(enter.player.name, enter.player) %></td>
+  	<td><%= link_to(enter.player.club.name, enter.player.club) %></td>
+    
+  	
+   <td>
+     <%
+      b = @breaks.where(:player_id => enter.player).order(:break).reverse
+      if b.count > 0
+        list = Array.new
+        b.each do |brk|
+          list.push(brk.break)
+        end
+     %>
+        <%= list.join(", ") %>
+        <% end %>
+   </td>
+   
+</tr>

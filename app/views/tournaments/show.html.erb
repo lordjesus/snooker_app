@@ -1,50 +1,38 @@
 <% provide(:title, @tournament.name) %>
 
-<p>Navn: <%= @tournament.name %></p>
-<p>Start: <%= @tournament.start_date %></p>
-
-<% if signed_in? && current_user.is_valid? %>
-	<% if has_joined?(@tournament) %>
-		<%= render 'leave', :info => { :player => current_user.player, :btn => "btn-large" } %>
-	<% else %>
-		<%= render 'join', :info => { :player => current_user.player, :btn => "btn-large btn-primary" } %>
-	<% end %>
-<% else %>
-	<p>Log ind for at tilmelde dig</p>
+<h3>Information</h3>
+<% if @tournament.alternate_club %>
+	<p>Ekstra spillested tages i brug ved mere end 28 tilmeldte. Opdelingen foregår udelukkende efter seedning.
 <% end %>
-
-<h3>Tilmeldte (<%= @players.count %>)</h3>
-
-<table class="table table-condensed table-bordered">
-	<thead>
-		<th>Seed</th>
-		<th>Navn</th>
-		<th>Klub</th>
-		<% if is_admin?(current_user) %>
-		<th>Bruger</th>
-		<th></th>
-		<% end %>
-	</thead>
-	<tbody>
-	<% seed = 1 %>
-	<% @players.each do |player| %>
-   		<%= render 'player_row', :info => { :player => player, :join => false, :seed => seed } %>
-   		<% seed += 1 %>	
-  	<% end %>
-  	</tbody>
+<table class="info">
+    <tr>
+        <td width="350">
+            <p>
+                <b>Spillested:</b> <%= link_to @tournament.club.name, @tournament.club %><br/>
+                
+                <% if @tournament.alternate_club %>
+                	<b>Ekstra spillested:</b> <%= link_to @tournament.alternate_club.name, @tournament.alternate_club %>
+                	
+                <% else %>
+                	Intet ekstra spillested
+                <% end %>   <br/>  
+                <b>Pris:</b> 200 kr.                    
+            </p>
+        </td>
+        <td width="350">
+            <p>                       
+                <b>Tilmeldingsfrist:</b> <i><%= @tournament.deadline %></i> <br/>
+                <b>Indledende runde:</b> <%= @tournament.start_date %><br/>
+                <b>Finalerunde:</b> <%= @tournament.final_date %> <br/>           
+                        
+            </p> 
+        </td>
+    </tr>
 </table>
 
-<% if is_admin?(current_user) %>
-	<h3>Tilmeld spillere</h3>
-	<table class="table table-striped table-condensed table-bordered">
-	<tr>
-		<th>Navn</th>
-		<th>Klub</th>
-		<th>Bruger</th>
-		<th></th>
-	</tr>
-	<% @not_joined.each do |player| %>
-   		<%= render 'player_row', :info => { :player => player, :join => true} %>	
-  	<% end %>
-	</table>
-<% end %>
+<%= if @tournament.finished == 0 
+		render 'active_tournament' 
+	else 
+		render 'finished_tournament'
+	end
+%>

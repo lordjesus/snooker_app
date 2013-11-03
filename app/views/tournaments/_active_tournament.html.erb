@@ -1,0 +1,49 @@
+<% if @tournament.deadline > DateTime.now %>
+<% if signed_in? && current_user.is_valid? %>
+	<% if has_joined?(@tournament) %>
+		<%= render 'leave', :info => { :player => current_user.player, :btn => "btn-large" } %>
+	<% else %>
+		<%= render 'join', :info => { :player => current_user.player, :btn => "btn-large btn-primary" } %>
+	<% end %>
+<% else %>
+	<p>Log ind for at tilmelde dig</p>
+<% end %>
+<% else %>
+	<p class="red-text">Tilmeldingsfristen er overskredet</p>
+<% end %>
+
+<h3>Tilmeldte (<%= @players.count %>)</h3>
+
+<table class="table table-condensed table-bordered">
+	<thead>
+		<th>Seed</th>
+		<th>Navn</th>
+		<th>Klub</th>
+		<% if is_admin?(current_user) %>
+		<th>Bruger</th>
+		<th></th>
+		<% end %>
+	</thead>
+	<tbody>
+	<% seed = 1 %>
+	<% @players.each do |player| %>
+   		<%= render 'player_row', :info => { :player => player, :join => false, :seed => seed } %>
+   		<% seed += 1 %>	
+  	<% end %>
+  	</tbody>
+</table>
+
+<% if is_admin?(current_user) %>
+	<h3>Tilmeld spillere</h3>
+	<table class="table table-striped table-condensed table-bordered">
+	<tr>
+		<th>Navn</th>
+		<th>Klub</th>
+		<th>Bruger</th>
+		<th></th>
+	</tr>
+	<% @not_joined.each do |player| %>
+   		<%= render 'player_row', :info => { :player => player, :join => true} %>	
+  	<% end %>
+	</table>
+<% end %>

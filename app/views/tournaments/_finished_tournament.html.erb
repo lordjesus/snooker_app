@@ -1,0 +1,20 @@
+<h3>Resultat</h3>
+
+<table class="table table-condensed table-striped table-bordered">
+	<thead>
+		<th>Placering</th>
+		<th>Navn</th>
+		<th>Klub</th>
+		
+		<th>Breaks</th>
+		
+		
+	</thead>
+	<tbody>
+	<% seed = 1 %>
+	<% @results.each do |result| %>
+   		<%= render 'fplayer_row', :info => { :enter => result } %>
+   		<% seed += 1 %>	
+  	<% end %>
+  	</tbody>
+</table>

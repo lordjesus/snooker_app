@@ -1,0 +1,39 @@
+<% tournaments = info[:tournaments]
+	header_text = info[:header_text]
+	collapse = info[:collapse]
+if tournaments.count > 0 %>
+<h3><%= header_text %> (<%= tournaments.count %>)</h3>
+	<table class="table table-condensed table-bordered">
+	<thead>
+		<th>Navn</th>
+		<th>Tilmeldingsfrist</th>
+		<th>Startdato</th>
+		<th># Spillere</th>
+		<% if signed_in? %>
+		<th>Tilmeldt</th>
+		<% end %>
+	</thead>
+	<% year = 5000 
+	tournaments.each do |tournament| %>
+	<% if collapse && tournament.final_date.year < year 
+		 year = tournament.final_date.year %>
+		<tr class="header warning">
+			 <th class="warning" colspan="5"><%= year %> <span class="pull-right">+</span>
+			</tr>
+		<% end %>
+   		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
+  	<% end %>
+</table>
+<% end %>
+
+<script>
+$(document).ready(function() {
+	$('.header').nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+$('.header').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $(this).nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+</script>

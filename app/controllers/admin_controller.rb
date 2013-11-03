@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 		@pending_users = User.where(:is_valid => false)
   		@valid_users = User.where(:is_valid => true)	
   		img = Magick::Image.new(30, 200){self.background_color = 'white'}
-  		Magick::Draw.new.annotate(img, 10, 10, 10, 0, 'DM 2012 / 2013') {
+  		Magick::Draw.new.annotate(img, 10, 10, 10, 0, 'Fyn Open 2013') {
   			self.font_family = 'Helvetica'
   			self.fill = 'black'
   			self.stroke = 'transparent'
@@ -14,6 +14,7 @@ class AdminController < ApplicationController
   			self.rotation = 90
   		}
   		img.trim!
+  		Tournament.last.update_attribute(:header_image, img.export_pixels.to_s)
   		img.write('/tmp/test2.jpg')
 	end
 

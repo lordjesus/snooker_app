@@ -104,10 +104,14 @@ class TournamentsController < ApplicationController
 		else
 			@not_joined = Player.all
 		end
+		@results = @tournament.enter.order(:rank)
+		@breaks = @tournament.high_break
 	end
 
 	def index
-		@tournaments = Tournament.where(['final_date > ?', DateTime.now]).order("start_date ASC")
+		@tournaments = Tournament.where(['deadline > ?', DateTime.now]).order("start_date ASC")
+		@current_tournaments = Tournament.where('finished = 0 and final_date > now() and deadline < now()')
+		@previous_tournaments = Tournament.where("finished = 1 and final_date < now() and final_date > '2000-01-01 00:00:00'").order("final_date DESC")
 	end
 
 	private
