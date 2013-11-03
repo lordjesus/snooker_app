@@ -28,7 +28,7 @@ class PlayersController < ApplicationController
   def show
   	@player = Player.find(params[:id])
     @tournaments_played = @player.enter.where(
-      'tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1)')
+      "tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1 and final_date > '2000-01-01 00:00:00')")
       .includes(:tournament)
       .order("tournaments.final_date DESC")
   end

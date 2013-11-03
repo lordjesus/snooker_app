@@ -42,17 +42,19 @@ end
 	<h2>Turneringer (<%= @tournaments_played.count %>)</h2>
 <table class="table table-striped table-condensed table-bordered">
 <thead>
-	<tr>			
+	<tr>	
+		<th width="20px">#</th>		
 		<th>Navn</th>
 		<th>Placering</th>	
 		
 	</tr>
 	</thead>
 	<tbody>
-
-	<% @tournaments_played.each do |e| %>
+	<% numbers = [] %>
+	<% @tournaments_played.each_with_index do |e, i| %>
 	<tr>
-
+		<% numbers.push(i+1) %>
+		<td><%= (i + 1).to_s %>.</td>
 		<td><%= link_to e.tournament.name, e.tournament %></td>
 		<td><%= get_rank(e.rank) %></td>
 
@@ -62,19 +64,33 @@ end
 	</tbody>
 </table>
 <% end %>
+<br>
+<h3>Form</h3>
 
-<canvas id="canvas" width="740" height="400"></canvas>
+<table>
+	<tr>
+		<td>
+			<%= image_tag('chart_rank_grey.png') %>	
+		</td>
+		<td>
+			<canvas id="canvas" width="500" height="400"></canvas>
+		</td>
+	</tr>
+</table>
+
+
+
 
 <%= javascript_tag do %>
 	 var lineChartData = {
-                        labels : <%= @player.enter.map { |p| p.lost_all } %>,
+                        labels : <%= numbers.reverse %>,
                         datasets : [                               
                                 {
                                         fillColor : "rgba(151,187,205,0.5)",
                                         strokeColor : "rgba(151,187,205,1)",
                                         pointColor : "rgba(151,187,205,1)",
                                         pointStrokeColor : "#fff",
-                                        data : <%= @player.enter.map { |p| p.rank } %>
+                                        data : <%= @player.enter.map { |p| -p.rank } %>
                                 }
                         ],
 
@@ -84,7 +100,8 @@ end
     		scaleOverride: true,
     		scaleSteps: 10,
     		scaleStepWidth: 1,
-    		scaleStartValue: 0,
+    		scaleStartValue: -10,
+    		scaleShowLabels : false
     		
 };       
         var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, lineOptions);
