@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
 	has_one :user
 	has_one :profile
 	has_many :high_break
+	has_many :rankings, foreign_key: "player_id"
 	has_many :enter, foreign_key: "player_id", dependent: :destroy
 	has_many :tournaments, through: :enter
 	validates(:name, presence: true, length: { minimum: 2 },

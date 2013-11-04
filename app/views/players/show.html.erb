@@ -80,8 +80,10 @@ end
 </table>
 
 <h3>Form, point</h3>
-<canvas id="pointCanvas" width="600" height="400"></canvas>
+<canvas id="pointCanvas" width="637" height="400" style="margin-left: 33px"></canvas>
 
+<h3>Form, position</h3>
+<canvas id="positionCanvas" width="637" height="400" style="margin-left: 33px"></canvas>
 
 <%= javascript_tag do %>
 	 var lineChartData = {
@@ -114,6 +116,22 @@ end
 
                 }
 
+        var positionChartData = {
+                        labels : <%= numbers.reverse %>,
+                        datasets : [                               
+                                {
+                                        fillColor : "rgba(151,187,205,0.5)",
+                                        strokeColor : "rgba(151,187,205,1)",
+                                        pointColor : "rgba(151,187,205,1)",
+                                        pointStrokeColor : "#fff",
+                                        data : <% r = @ranking_history.map { |p| p.ranking }.max + 1 %>
+                                        	<%= @ranking_history.map { |p| -p.ranking + r } %>,
+                                    
+                                }
+                        ],
+
+                }
+
         var lineOptions = {
     		scaleOverride: true,
     		scaleSteps: 10,
@@ -134,5 +152,7 @@ end
         var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, lineOptions);
 
         var pointLine = new Chart(document.getElementById("pointCanvas").getContext("2d")).Line(pointsChartData);
+
+        var positionLine = new Chart(document.getElementById("positionCanvas").getContext("2d")).Line(positionChartData);
 <% end %>
 

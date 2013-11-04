@@ -31,6 +31,8 @@ class PlayersController < ApplicationController
       "tournament_id IN (SELECT DISTINCT(id) FROM tournaments WHERE finished = 1 and final_date > '2000-01-01 00:00:00')")
       .includes(:tournament)
       .order("tournaments.final_date DESC")
+    @ranking_history = @player.rankings.includes(:tournament)
+      .order("tournaments.final_date DESC")
   end
 
   def create
