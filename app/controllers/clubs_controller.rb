@@ -25,7 +25,29 @@ class ClubsController < ApplicationController
 
   def show
   	@club = Club.find(params[:id])
-  	@players = @club.players
+  	@players = @club.players.order('position ASC')
+
+    @first_half = Array.new
+    @second_half = Array.new
+
+    n = @players.count / 2
+    if @players.count % 2 > 0
+      n = n + 1
+    end
+
+    if @players.count > 5
+    @players.each_with_index do |p, i|
+      if i < n
+        @first_half.push(p)
+      else
+        @second_half.push(p)
+      end
+    end
+  else
+    @first_half = @players
+  end
+
+    @tournaments = @club.tournaments.order('final_date DESC')
   end
 
   def create

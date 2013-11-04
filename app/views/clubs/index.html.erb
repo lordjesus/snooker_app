@@ -1,5 +1,27 @@
+<% provide(:title, 'Klubber') %>
 <h1>Klubber</h1>
 
-<% @clubs.each do |club| %>
-	<p><%= link_to(club.name, club) %>, <%= club.address %>. Antal borde: <%= club.number_of_tables %></p>
-<% end %>
+<table class="table table-striped table-condensed table-bordered">
+	<tr>
+		<th>Navn</th>
+		<th>Adresse</th>
+		<th># Borde</th>
+		<th># Spillere</th>		
+	</tr>
+	<% @clubs.each do |club| %>
+	<tr>
+   		<td>
+   			<%= link_to club.name, club %>
+   		</td>
+   		<td>
+   			<%= club.address %>
+   		</td>
+   		<td>
+   			<%= club.number_of_tables %>
+   		</td>
+   		<td>
+   			<%= club.players.count %>
+   		</td>
+   		</tr>
+  	<% end %>
+</table>

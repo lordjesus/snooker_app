@@ -1,7 +1,99 @@
-<h1><%= @club.name %></h1>
+<% provide(:title, @club.name) %>
+<p><strong>Navn:</strong> <%= @club.name %></p>
 <p><strong>Adresse:</strong> <%= @club.address %></p>
 <p><strong>Antal borde: </strong> <%= @club.number_of_tables %></p>
-<p><strong>Spillere:</strong></p>
-<% @players.each do |player| %>
-	<p><%= link_to(player.name, player) %></p>
+<br>
+<h3>Spillere</h3>
+
+<table>
+<tr>
+<td width="350px">
+<table class="table table-condensed table-striped table-bordered">
+<thead>
+	<tr>
+		<th>
+			Navn
+		</th>
+		<th>
+			Rangliste placering
+		</th>
+	</tr>
+</thead>
+<tbody>
+	<% @first_half.each do |player| %>
+		<tr>
+			<td>
+				<%= link_to(player.name, player) %>
+			</td>
+			<td>
+				<%= player.position %>
+			</td>
+		</tr>	
+	<% end %>
+</tbody>
+</table>
+</td>
+<% if !@second_half.empty? %>
+<td width="350px" valign="top">
+	<table class="table table-condensed table-striped table-bordered">
+<thead>
+	<tr>
+		<th>
+			Navn
+		</th>
+		<th>
+			Rangliste placering
+		</th>
+	</tr>
+</thead>
+<tbody>
+	<% @second_half.each do |player| %>
+		<tr>
+			<td>
+				<%= link_to(player.name, player) %>
+			</td>
+			<td>
+				<%= player.position %>
+			</td>
+		</tr>	
+	<% end %>
+</tbody>
+</table>
+</td>
+<% end %>
+</tr>
+</table>
+
+<% if !@tournaments.empty? %>
+<h3>Turneringer</h3>
+<table class="table table-condensed table-striped table-bordered">
+<thead>
+	<tr>
+		<th>
+			Navn
+		</th>
+		<th>
+			Startdato
+		</th>
+		<th>
+			Finaledato
+		</th>
+	</tr>
+</thead>
+<tbody>
+	<% @tournaments.each do |tour| %>
+		<tr>
+			<td>
+				<%= link_to(tour.name, tour) %>
+			</td>
+			<td>
+				<%= tour.start_date %>
+			</td>
+			<td>
+				<%= tour.final_date %>
+			</td>
+		</tr>	
+	<% end %>
+</tbody>
+</table>
 <% end %>

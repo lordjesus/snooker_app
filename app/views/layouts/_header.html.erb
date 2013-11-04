@@ -7,6 +7,7 @@
           <li><%= link_to "Rangliste", players_path %></li>
           <li><%= link_to "Breaks", breaks_path %></li>
           <li><%= link_to "Turneringer", tournaments_path %></li>
+          <li><%= link_to "Klubber", clubs_path %></li>
           <% if signed_in? %>
             
             <% if is_admin?(current_user) %>
@@ -25,14 +26,14 @@
             <% end %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
+                Konto <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                <li><%= link_to "Profil", current_user %></li>
+                <li><%= link_to "Indstillinger", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to "Sign out", signout_path, method: "delete" %>
+                  <%= link_to "Log ud", signout_path, method: "delete" %>
                 </li>
               </ul>
             </li>
