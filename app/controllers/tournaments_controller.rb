@@ -122,6 +122,8 @@ class TournamentsController < ApplicationController
 	  	players.each do |player|
 	  		player.ranking_points = 0
 	  		player.save
+	  		player.class.module_eval { attr_accessor :tournaments_played }
+	  		player.tournaments_played = 0;
 	  	end
 	  	tournaments.each do |tour|
 	  		enters = tour.enter
@@ -129,6 +131,7 @@ class TournamentsController < ApplicationController
 	  			player = players.find(row.player_id)
 				if (row.points)
 	  				player.ranking_points += row.points
+	  				player.tournaments_played = player.tournaments_played + 1;
 	  				player.save
 	  			end
 	  		end
@@ -142,6 +145,10 @@ class TournamentsController < ApplicationController
 	  		p.position = i
 	  		i += 1
 	  		p.save
+	  		Ranking.create(:player_id => p.id, :tournament_id => tournaments.last.id,
+	  		 	:ranking => p.position, :ranking_points => p.ranking_points, 
+	  		 	:tournaments_played => p.tournaments_played)
+
 	  	end
 	  end
 
