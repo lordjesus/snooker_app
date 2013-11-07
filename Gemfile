@@ -10,6 +10,8 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'jquery-ui-rails'
 gem "rmagick", "~>2.13.2", :require => 'RMagick'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

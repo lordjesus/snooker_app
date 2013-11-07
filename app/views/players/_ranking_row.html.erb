@@ -5,13 +5,13 @@
   <td>
     <% if player.last_position > 0 %>
     <% if player.position < player.last_position %>
-      <%= image_tag("up-20.png", alt: "Up", 
+      <%= image_tag("new-up.png", alt: "Up", 
         title: "Sidste placering: #{player.last_position}") %>
     <% elsif player.position > player.last_position %>
-      <%= image_tag("down-20.png", alt: "Down", 
+      <%= image_tag("new-down.png", alt: "Down", 
         title: "Sidste placering: #{player.last_position}") %>
     <% else %>
-      <%= image_tag("none-20.png", alt: "None", 
+      <%= image_tag("new-none.png", alt: "None", 
         title: "Ingen ændring") %>
     <% end %>
     <% else %>

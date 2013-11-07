@@ -37,6 +37,6 @@ class ProfilesController < ApplicationController
 				:training_week, :fav_training, :highest_break_tournament,
 				:highest_break_practice, :best_result, :best_match,
 				:favourite_player, :hobbies, :fav_music, :fav_movie,
-				:email, :phone, :player_id)
+				:email, :phone, :player_id, :avatar)
 		end
 end
