@@ -1,4 +1,5 @@
 class TournamentsController < ApplicationController
+	require 'RMagick'
 	before_action :admin_user,    only: [:new, :create, :destroy, :edit, :update, :finish]
 
 	def new
@@ -62,6 +63,7 @@ class TournamentsController < ApplicationController
 		
 		@tournament.finished = 1;
 		if @tournament.save
+			generate_header(tournament)
 			update_ranking_list
 			flash[:success] = 'Turnering afsluttet'
 			redirect_to admin_tournaments_path
@@ -115,6 +117,22 @@ class TournamentsController < ApplicationController
 	end
 
 	private
+
+	  def generate_header(tournament)
+		img = Magick::Image.new(30, 300){self.background_color = 'white'}
+  		Magick::Draw.new.annotate(img, 10, 10, 10, 0, tournament.name) {
+  			self.font_family = 'Helvetica'
+  			self.fill = 'black'
+  			self.stroke = 'transparent'
+  			self.pointsize = 13
+  			self.rotation = 90
+  		}
+  		img.trim!  		
+  		file = Tempfile.new([tournament.name, '.png'])
+  		img.write(file.path)
+  		tournament.header_image = file 
+  		tournament.save!
+	  end
 
 	  def update_ranking_list
 	  	tournaments = Tournament.all.where(:finished => 1).order('final_date desc').limit(6).reverse

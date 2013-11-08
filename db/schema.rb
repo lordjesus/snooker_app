@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107220038) do
+ActiveRecord::Schema.define(version: 20131108230012) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -117,8 +117,11 @@ ActiveRecord::Schema.define(version: 20131107220038) do
     t.integer  "max_points"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "finished",          default: 0
-    t.binary   "header_image"
+    t.integer  "finished",                  default: 0
+    t.string   "header_image_file_name"
+    t.string   "header_image_content_type"
+    t.integer  "header_image_file_size"
+    t.datetime "header_image_updated_at"
   end
 
   create_table "users", force: true do |t|

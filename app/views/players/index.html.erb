@@ -10,8 +10,8 @@
 		<% @tournaments.each_with_index do |tour,i| %>
 			<th width="55" align="center" style="text-align: center;"><%= 
 			if (tour.header_image)
-				#ia = tour.header_image.gsub(']', '').gsub('[', '').split(', ').map { |x| x.to_i }
-				
+				#ia = tour.header_image.gsub(']', '').gsub('[', '').split(', ').map { |x| x.to_i }				
+				link_to image_tag(tour.header_image.url), tour
 			else
 				if i > 2
 					link_to image_tag('test.jpg'), tour
