@@ -63,7 +63,7 @@ class TournamentsController < ApplicationController
 		
 		@tournament.finished = 1;
 		if @tournament.save
-			generate_header(tournament)
+			generate_header(@tournament)
 			update_ranking_list
 			flash[:success] = 'Turnering afsluttet'
 			redirect_to admin_tournaments_path
