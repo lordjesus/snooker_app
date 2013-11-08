@@ -5,7 +5,11 @@ class AdminController < ApplicationController
 	def users
 		@pending_users = User.where(:is_valid => false)
   		@valid_users = User.where(:is_valid => true)	
-  		img = Magick::Image.new(30, 200){self.background_color = 'white'}
+  		
+	end
+
+	def image_test
+		img = Magick::Image.new(30, 200){self.background_color = 'white'}
   		Magick::Draw.new.annotate(img, 10, 10, 10, 0, 'Fyn Open 2013') {
   			self.font_family = 'Helvetica'
   			self.fill = 'black'
