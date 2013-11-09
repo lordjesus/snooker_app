@@ -34,13 +34,23 @@ textarea {
 
 .navbar {
   width: 740px;
-  right: 0;
-  left: none;
-  position: absolute;
+  
+}
+
+.navbar ul {
+ 
 }
 
 .navbar-fixed-top .container {
   width: auto;
+}
+
+.navbar .nav.pull-right {
+  float: right;
+  margin-right: 0; 
+  right: 0;
+  left: auto;
+  position: absolute;
 }
 
 .center {
