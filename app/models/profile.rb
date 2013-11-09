@@ -4,5 +4,5 @@ class Profile < ActiveRecord::Base
 	has_attached_file :avatar, styles: {
 		medium: '300x300',
 		thumb: '100x100>'
-	}, :default_url => "https://s3-eu-west-1.amazonaws.com/snookerdk/profiles/avatars/:style/missing.png"
+	}, :default_url => "images/avatars/:style/missing.png"
 end
