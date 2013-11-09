@@ -4,6 +4,9 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    if @user.is_valid
+      redirect_to @user.player
+    end
   end
 
   def new
