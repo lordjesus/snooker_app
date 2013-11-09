@@ -131,25 +131,30 @@ class TournamentsController < ApplicationController
   		file = Tempfile.new([tournament.name, '.png'])
   		img.write(file.path)
   		tournament.header_image = file 
-  		tournament.save!
+  		tournament.save! # Uncomment in production!
 	  end
 
 	  def update_ranking_list
+	  	played = Hash.new
+
+
 	  	tournaments = Tournament.all.where(:finished => 1).order('final_date desc').limit(6).reverse
 	  	players = Player.all
 	  	players.each do |player|
 	  		player.ranking_points = 0
 	  		player.save
-	  		player.class.module_eval { attr_accessor :tournaments_played }
-	  		player.tournaments_played = 0;
+	  		played[player.id] = 0;
 	  	end
 	  	tournaments.each do |tour|
+	  		if tour.header_image_file_name == nil
+	  			generate_header(tour)
+	  		end
 	  		enters = tour.enter
 	  		enters.each do |row|
 	  			player = players.find(row.player_id)
 				if (row.points)
 	  				player.ranking_points += row.points
-	  				player.tournaments_played = player.tournaments_played + 1;
+	  				played[player.id] = played[player.id] + 1	  				
 	  				player.save
 	  			end
 	  		end
@@ -165,7 +170,7 @@ class TournamentsController < ApplicationController
 	  		p.save
 	  		Ranking.create(:player_id => p.id, :tournament_id => tournaments.last.id,
 	  		 	:ranking => p.position, :ranking_points => p.ranking_points, 
-	  		 	:tournaments_played => p.tournaments_played)
+	  		 	:tournaments_played => played[p.id])
 
 	  	end
 	  end
