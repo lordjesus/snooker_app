@@ -128,7 +128,7 @@ class TournamentsController < ApplicationController
   			self.rotation = 90
   		}
   		img.trim!  		
-  		file = Tempfile.new([tournament.name, '.png'])
+  		file = Tempfile.new(["tournament#{tournament.id}",'.png'])
   		img.write(file.path)
   		tournament.header_image = file 
   		tournament.save! # Uncomment in production!
