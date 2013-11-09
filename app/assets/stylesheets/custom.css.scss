@@ -34,6 +34,8 @@ textarea {
 
 .navbar {
   width: 740px;
+  right: 0;
+  position: absolute;
 }
 
 .navbar-fixed-top .container {
@@ -64,6 +66,8 @@ textarea {
   max-height: 10px;
   
 }
+
+.hiddenRow {padding: 0 !important;}
 
 /* typography */
 

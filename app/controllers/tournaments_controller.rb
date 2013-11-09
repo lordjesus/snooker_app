@@ -131,7 +131,7 @@ class TournamentsController < ApplicationController
   		file = Tempfile.new(["tournament#{tournament.id}",'.png'])
   		img.write(file.path)
   		tournament.header_image = file 
-  		tournament.save! # Uncomment in production!
+  		tournament.save! unless Rails.env.development? # Uncomment in production!
 	  end
 
 	  def update_ranking_list
