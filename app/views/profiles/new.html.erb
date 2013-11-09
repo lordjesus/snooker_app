@@ -3,6 +3,9 @@
 <%= form_for(@profile) do |f| %>
       <%= render 'shared/error_messages', :update => @profile %>
       
+      <%= f.label :avatar, "Profilbillede" %><br />
+      <%= f.file_field :avatar %>
+
       <%= f.label :born_year, "Fødselsår" %>
       <%= f.text_field :born_year %>
 
