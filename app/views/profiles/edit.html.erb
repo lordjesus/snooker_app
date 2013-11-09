@@ -7,7 +7,7 @@
       <%= f.file_field :avatar %>
 
       <%= label_tag "Nuværende profilbillede" %>
-      <%= image_tag profile.avatar.url(:thumb), :class => "img-polaroid" %>
+      <%= image_tag @profile.avatar.url(:thumb), :class => "img-polaroid" %>
       
       <%= f.label :born_year, "Fødselsår" %>
       <%= f.text_field :born_year %>
