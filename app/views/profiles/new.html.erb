@@ -1,4 +1,4 @@
-<h1>Opret profil</h1>
+<% provide(:title, 'Opret profil') %>
 <div class="span6 ">
 <%= form_for(@profile) do |f| %>
       <%= render 'shared/error_messages', :update => @profile %>

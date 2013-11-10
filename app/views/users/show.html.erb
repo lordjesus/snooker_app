@@ -1,6 +1,6 @@
 <% provide(:title, @user.username) %>
 <h3>Din bruger er oprettet, men...</h3>
 
-<p>For at sikre os at du i virkeligheden er <%= @user.player.name %>, skal du kontakte Daniel Jallov og bekræfte din identitet. Dette kan du gøre ved at sende en mail til ham på <a href="mailto:daniel@snooker.dk">daniel@snooker.dk</a> eller finde ham på Facebook og skrive en personlig besked. </p>
-<p>Det vigtigste er, at din identitet kan blive bekræftet, så andre (ondsindede!) personer ikke misbruger den.</p>
+<p>For at sikre os at du i virkeligheden er <%= @user.player.name %>, skal du kontakte Daniel Jallov og bekræfte din identitet. Hvis du bruger Facebook kan du skrive en personlig besked til <%= link_to 'Daniel Jallov', 'https://www.facebook.com/djallov' %>. Ellers kan sende en mail til ham på <a href="mailto:daniel@snooker.dk">daniel@snooker.dk</a>.</p>
+<p>Det vigtigste er, at din identitet kan blive bekræftet, så andre personer ikke misbruger den.</p>
 <p>Indtil din bruger er bekræftet, kan du ikke tilmelde dig turneringerne via siden.</p>

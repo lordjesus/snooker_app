@@ -15,20 +15,6 @@
 	<%= render 'profile', :profile => @player.profile %>
  <% end %>
 
-
-
-<% if @player.high_break.count > 0 %>
-	<p>
-		<strong>Breaks:</strong>
-		<% @player.high_break.order('break desc').each_with_index do |b,i| %>
-			<% if i > 0 %>
-			,
-			<% end %>
-			<%= link_to b.break, b.tournament %>
-		<% end %>
-	</p>
-<% end %>
-
 <% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user)
 	if @player.profile %>
 		<p><%= link_to 'Opdater spillerprofil', edit_profile_path(:id => @player.profile.id), class: "btn" %></p>
@@ -47,7 +33,7 @@ end
 		<th width="20px">#</th>		
 		<th>Navn</th>
 		<th>Placering</th>	
-		
+		<th>Breaks</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -58,7 +44,17 @@ end
 		<td><%= (i + 1).to_s %>.</td>
 		<td><%= link_to e.tournament.name, e.tournament %></td>
 		<td><%= get_rank(e.rank) %></td>
-
+        <td>
+            <% b = HighBreak.where(:tournament_id => e.tournament, :player_id => e.player).order('break DESC') 
+               if b.count > 0
+                   list = Array.new
+                   b.each do |brk|
+                   list.push(brk.break)
+               end
+            %>
+            <%= list.join(", ") %>
+        <% end %>
+        </td>
 		
 	</tr>
 	<% end %>
@@ -66,7 +62,7 @@ end
 </table>
 <% end %>
 <br>
-<h3>Form, placering</h3>
+<h3>Form, placering pr. turnering</h3>
 
 <table>
 	<tr>
@@ -79,10 +75,10 @@ end
 	</tr>
 </table>
 
-<h3>Form, point</h3>
+<h3>Form, point pr. turnering</h3>
 <canvas id="pointCanvas" width="637" height="400" style="margin-left: 33px"></canvas>
 
-<h3>Form, position</h3>
+<h3>Form, rangliste placering</h3>
 <canvas id="positionCanvas" width="637" height="400" style="margin-left: 33px"></canvas>
 
 <%= javascript_tag do %>
