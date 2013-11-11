@@ -5,8 +5,9 @@
 	<% else %>
 		<%= render 'join', :info => { :player => current_user.player, :btn => "btn-large btn-primary" } %>
 	<% end %>
-<% else %>
-	<p>Log ind for at tilmelde dig</p>
+<% else 
+		store_location %>
+	<p><b><%= link_to "Log ind", signin_path %> eller <%= link_to "registrer dig", signup_path %> for at tilmelde dig</b></p>
 <% end %>
 <% else %>
 	<p class="red-text">Tilmeldingsfristen er overskredet</p>

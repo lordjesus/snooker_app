@@ -1,4 +1,8 @@
 <% provide(:title, 'Turneringer') %>
+<% if !signed_in? 
+	store_location %>
+<p><b><%= link_to "Log ind", signin_path %> eller <%= link_to "registrer dig", signup_path %> for at tilmelde dig</b></p>
+<% end %>
 <%= render 'ttable', :info => { :tournaments => @tournaments, :header_text => 'Kommende turneringer', :collapse => false } %>
 <%= render 'ttable', :info => { :tournaments => @current_tournaments, :header_text => 'Igangværende turneringer', :collapse => false } %>
 <%= render 'ttable', :info => { :tournaments => @previous_tournaments, :header_text => 'Tidligere turneringer', :collapse => true } %>

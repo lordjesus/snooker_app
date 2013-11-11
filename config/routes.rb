@@ -9,7 +9,7 @@ SnookerApp::Application.routes.draw do
   resources :tournaments
   resources :password_resets
   resources :enters, only: [:create, :destroy]
-  root  'static_pages#home'
+  root  'players#index'
   match '/breaks',   to: 'static_pages#high_break',  via: 'get'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

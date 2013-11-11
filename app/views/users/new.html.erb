@@ -1,27 +1,28 @@
-<% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
+<% provide(:title, 'Opret bruger') %>
 
 <div class="row">
   <div class="span6 offset1">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', :update => @user %>
       
-      <%= f.label :username %>
+      <%= f.label :username, "Brugernavn" %>
       <%= f.text_field :username %>
 
       <%= f.label :email %>
       <%= f.text_field :email %>
 
       <%= f.label 'Vælg dig selv fra listen' %>
-      <%= f.collection_select :player_id, Player.find(:all, :conditions => ['id not in (?)', Player.joins(:user)]), :id, :name, include_blank: true %>
+      <%= f.collection_select :player_id, Player.find(:all, :conditions => ['id not in (?)', Player.joins(:user)]).sort_by(&:name), :id, :name, include_blank: true %>
+
+      <p>(Hvis ikke du er at finde på listen, så skriv til <a href="mailto:daniel@snooker.dk">daniel@snooker.dk</a>)</p>
 
       <%= f.label :password %>
       <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, "Bekræft password" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Opret bruger", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
