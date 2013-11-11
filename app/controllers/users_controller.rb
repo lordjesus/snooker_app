@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   	if @user.save
   		sign_in @user
+      UserMailer.user_created(@user).deliver
   		flash[:success] = "Velkommen til snooker app"
   		redirect_to @user
   	else
