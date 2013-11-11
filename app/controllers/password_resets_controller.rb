@@ -8,7 +8,7 @@ class PasswordResetsController < ApplicationController
   	if (user)
   		
       user.send_password_reset
-      flash[:success] = "Email med password instruktioner er sendt #{edit_password_reset_url(user.reset_token)}"
+      flash[:success] = "Email med password instruktioner er sendt"
       
   	else 
   		flash[:danger] = 'Ingen bruger med denne email'
