@@ -30,6 +30,7 @@ class AdminController < ApplicationController
 	def approve_user
 		@user = User.find(params[:id])
 		@user.update_attribute(:is_valid, true)
+		UserMailer.user_activated(@user).deliver
 		redirect_to admin_users_path
 	end
 
@@ -41,7 +42,7 @@ class AdminController < ApplicationController
 
 	private
 
-  	def admin_user
-      redirect_to(root_url) unless current_user && current_user.admin?
-    end
+  		def admin_user
+        	redirect_to(root_url) unless current_user && current_user.admin?
+    	end
 end

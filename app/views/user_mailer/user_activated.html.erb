@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <h1>Bruger aktiveret</h1>
+    <p>Hej <%= @user.username %>,</p>
+
+<% if @user.player %>
+Det er nu blevet bekræftet at du i virkeligheden er <%= @user.player.name %>, og din bruger er blevet aktiveret. Du kan nu tilmelde dig <%= link_to 'turneringer', 'http://snooker.dk/turneringer' %> og udfylde lidt information om dig selv i en <%= link_to 'spillerprofil', new_profile_path(:player_id => @player.id) %>.
+<% end %>
+  </body>
+</html>

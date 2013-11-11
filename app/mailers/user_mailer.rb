@@ -15,4 +15,21 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: user.email, subject: "Profil oprettet")
   end
+
+  def user_activated(user) 
+    @user = user
+    mail(to: user.email, subject: "Profil aktiveret")
+  end
+
+  def user_joined_tournament(user, tournament)
+    @user = user
+    @tournament = tournament
+    mail(to: user.email, subject "Tilmelding til #{tournament.name}")
+  end
+
+  def user_left_tournament(user, tournament)
+    @user = user
+    @tournament = tournament
+    mail(to: user.email, subject "Afmelding af #{tournament.name}")
+  end
 end

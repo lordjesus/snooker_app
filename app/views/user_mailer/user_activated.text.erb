@@ -1,0 +1,7 @@
+Bruger aktiveret
+===================
+Hej <%= @user.username %>,
+
+<% if @user.player %>
+Det er nu blevet bekræftet at du i virkeligheden er <%= @user.player.name %>, og din bruger er blevet aktiveret. Du kan nu tilmelde dig turneringer på http://snooker.dk/turneringer og udfylde lidt information om dig selv i en spillerprofil på <%= new_profile_path(:player_id => @player.id) %>.
+<% end %>
