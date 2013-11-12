@@ -3,7 +3,7 @@
    %>
 <tr>
   <td>
-    <% if player.last_position > 0 %>
+    <% if player.last_position && player.last_position > 0 %>
     <% if player.position < player.last_position %>
       <%= image_tag("new-up.png", alt: "Up", 
         title: "Sidste placering: #{player.last_position}") %>
