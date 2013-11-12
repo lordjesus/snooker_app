@@ -1,5 +1,5 @@
 <tr>
-   <td><%= user.username %></td>
+   <td><%= link_to user.username, user %></td>
   	<td><%= user.email %></td>
   	<td>
   		<% if user.player == nil %>
@@ -8,6 +8,14 @@
   			<%= link_to(user.player.name, user.player) %> (<%= link_to('Rediger', edit_user_path(user)) %>)
  		<% end %> 
   	</td>
+    <td>
+      <%= 
+        case user.user_level
+          when 0 then 'Bruger'
+          when 1 then 'Klubleder'
+          when 2 then 'Admin' 
+        end %>
+    </td>
    <td>
 
       <%= link_to('Deaktiver', deactivate_user_path(user), { :class => 'btn btn-mini btn-danger'}) unless current_user?(user) %>

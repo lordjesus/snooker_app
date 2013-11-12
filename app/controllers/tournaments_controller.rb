@@ -4,6 +4,7 @@ class TournamentsController < ApplicationController
 
 	def new
 		@tournament = Tournament.new 
+		
 	end
 
 	def finish
@@ -100,14 +101,26 @@ class TournamentsController < ApplicationController
 
 	def show
 		@tournament = Tournament.find(params[:id])
-		@players = @tournament.players.find(:all, :order => "position ASC")
-		if @players.count > 0
-			@not_joined = Player.find(:all, :conditions => ['id not in (?)', @players.map(&:id)])
-		else
-			@not_joined = Player.all
+		@players = @tournament.players.order("position ASC")
+		if is_admin?(current_user)
+			if @players.count > 0
+				@not_joined = Player.find(:all, :conditions => ['id not in (?)', @players.map(&:id)], :order => "club_id")
+			else
+				@not_joined = Player.all.order(:club_id)
+			end
+
+		elsif is_club_leader?(current_user)
+			if @players.count > 0
+				@not_joined = Player.find(:all, :conditions => ['club_id = ? AND id not in (?)',current_user.player.club_id, @players.map(&:id)])
+			else
+				@not_joined = Player.all.where(:club_id => current_user.player.club_id)
+			end
+		end			
+
+		if @tournament.finished == 1
+			@results = @tournament.enter.order(:rank)
+			@breaks = @tournament.high_break
 		end
-		@results = @tournament.enter.order(:rank)
-		@breaks = @tournament.high_break
 	end
 
 	def index

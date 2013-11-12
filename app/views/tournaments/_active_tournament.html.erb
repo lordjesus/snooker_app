@@ -34,7 +34,7 @@
   	</tbody>
 </table>
 
-<% if is_admin?(current_user) %>
+<% if is_admin?(current_user) || is_club_leader?(current_user) %>
 	<h3>Tilmeld spillere</h3>
 	<table class="table table-striped table-condensed table-bordered">
 	<tr>
@@ -43,8 +43,29 @@
 		<th>Bruger</th>
 		<th></th>
 	</tr>
-	<% @not_joined.each do |player| %>
+	<%
+	club_id = 0 
+	@not_joined.each do |player| 
+		if player.club_id > club_id
+			club_id = player.club_id
+		%>
+			<tr class="header warning">
+				 <th style="text-align: center;"colspan="4"><%= link_to player.club.name, "#collapse", :data => {:toggle=>"modal"} %> <span class="pull-right">+</span>
+				</tr>
+		<% end %>
    		<%= render 'player_row', :info => { :player => player, :join => true} %>	
   	<% end %>
 	</table>
 <% end %>
+
+<script>
+$(document).ready(function() {
+	$('.header').nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+$('.header').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $(this).nextUntil('tr.header').slideToggle(100, function(){
+    });
+});
+</script>

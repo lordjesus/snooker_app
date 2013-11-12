@@ -5,4 +5,5 @@ class Tournament < ActiveRecord::Base
 	belongs_to :club
 	belongs_to :alternate_club, :class_name => "Club", :foreign_key => "alternate_club_id"
 	has_attached_file :header_image
+	validates :name, presence: :true
 end

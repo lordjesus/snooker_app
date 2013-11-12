@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108230012) do
+ActiveRecord::Schema.define(version: 20131112122303) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 20131108230012) do
     t.integer  "number_of_tables"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "web_page"
   end
 
   create_table "enter", force: true do |t|

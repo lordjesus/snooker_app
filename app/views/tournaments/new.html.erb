@@ -1,23 +1,22 @@
 <% provide(:title, 'Ny turnering') %>
-<h1>Ny turnering</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span6 offset1">
     <%= form_for(@tournament) do |f| %>      
-      
-      <%= f.label :name %>
+      <%= render 'shared/error_messages', :update => @tournament %>
+      <%= f.label :name, "Navn" %>
       <%= f.text_field :name %>
 
-      <%= f.label :start_date %>
-      <%= f.datetime_select :start_date, :minute_step => 30 %>
+      <%= f.label :start_date, "Start, indledende runde" %>
+      <%= f.datetime_select :start_date, :minute_step => 30, :default => { :hour => 10, :min => 0 } %>
 
-      <%= f.label :final_date %>
-      <%= f.datetime_select :final_date, :minute_step => 30 %>
+      <%= f.label :final_date, "Start, finalerunde" %>
+      <%= f.datetime_select :final_date, :minute_step => 30, :default => { :hour => 10, :min => 0 } %>
 
       <%= f.label :deadline %>
-      <%= f.datetime_select :deadline %>
+      <%= f.datetime_select :deadline, :default => { :hour => 23, :min => 59, :sec => 59 } %>
 
-      <%= f.label :entry_fee %>
+      <%= f.label :entry_fee, "Pris" %>
       <%= f.text_field :entry_fee %>
 
       <%= f.label :club_id, 'Klub' %>
@@ -26,7 +25,7 @@
       <%= f.label :alternate_club_id, 'Ekstra spillested' %>
       <%= f.collection_select :alternate_club_id, Club.all, :id, :name, :include_blank => true %>
 
-      <%= f.label :max_points %>
+      <%= f.label :max_points, "Max point" %>
       <%= f.text_field :max_points %>
 
       <%= f.submit "Opret turnering", class: "btn btn-large btn-primary" %>

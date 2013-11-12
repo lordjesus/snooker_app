@@ -4,10 +4,10 @@
       <p id="logo"><%= yield(:title) %></p>
       <nav>
         <ul class="nav pull-right">          
-          <li><%= link_to "Rangliste", root_path %></li>
-          <li><%= link_to "Breaks", breaks_path %></li>
-          <li><%= link_to "Turneringer", tournaments_path %></li>
-          <li><%= link_to "Klubber", clubs_path %></li>
+          <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Rangliste", root_path %></li>
+          <li class="<%= 'active' if current_page?(breaks_path) %>"><%= link_to "Breaks", breaks_path %></li>
+          <li class="<%= 'active' if current_page?(tournaments_path) %>"><%= link_to "Turneringer", tournaments_path %></li>
+          <li class="<%= 'active' if current_page?(clubs_path) %>"><%= link_to "Klubber", clubs_path %></li>
           <% if signed_in? %>
             
             <% if is_admin?(current_user) %>

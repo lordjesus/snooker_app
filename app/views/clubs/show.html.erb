@@ -1,7 +1,20 @@
 <% provide(:title, @club.name) %>
-<p><strong>Navn:</strong> <%= @club.name %></p>
-<p><strong>Adresse:</strong> <%= @club.address %></p>
-<p><strong>Antal borde: </strong> <%= @club.number_of_tables %></p>
+<p><strong>Navn:</strong> <%= @club.name %><br>
+<strong>Adresse:</strong> <%= @club.address %><br>
+<strong>Antal borde: </strong> <%= @club.number_of_tables %><br></p>
+
+<p>
+<% if @club.phone && @club.phone.length > 0 %>
+<strong>Tlf. nr.:</strong> <%= @club.phone %><br>
+<% end %>
+<% if @club.email && @club.email.length > 0 %>
+<strong>Email:</strong> <%= link_to @club.email, "mailto:#{@club.email}" %><br>
+<% end %>
+<% if @club.web_page && @club.web_page.length > 0 %>
+<strong>Hjemmeside: </strong> <%= link_to @club.web_page, @club.web_page %><br>
+<% end %>
+</p>
+
 <br>
 <h3>Spillere</h3>
 
