@@ -20,7 +20,7 @@ module ApplicationHelper
         when 9
           "33-40"
         else
-          "Uden for rækkevidde"
+          "Meldt afbud"
         end     
     end
 end
