@@ -12,6 +12,7 @@ gem 'jquery-ui-rails'
 gem "rmagick", "~>2.13.2", :require => 'RMagick'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

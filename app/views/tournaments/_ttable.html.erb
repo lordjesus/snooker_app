@@ -28,12 +28,11 @@ if tournaments.count > 0 %>
 
 <script>
 $(document).ready(function() {
-	$('.header').nextUntil('tr.header').slideToggle(100, function(){
-    });
+	$('.header').nextUntil('tr.header').slideToggle(0);
 });
 $('.header').click(function(){
    $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
-    $(this).nextUntil('tr.header').slideToggle(100, function(){
+    $(this).nextUntil('tr.header').slideToggle(0, function(){
     });
 });
 </script>
