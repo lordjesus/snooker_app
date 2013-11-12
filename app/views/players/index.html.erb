@@ -8,7 +8,7 @@
 		<th>Navn</th>
 		<th>Klub</th>		
 		<% @tournaments.each_with_index do |tour,i| %>
-			<th width="55" align="center" style="text-align: center;"><%= 
+			<th width="50" align="center" style="text-align: center;"><%= 
 			if (tour.header_image_file_name)
 				#ia = tour.header_image.gsub(']', '').gsub('[', '').split(', ').map { |x| x.to_i }				
 				link_to image_tag(tour.header_image.url), tour

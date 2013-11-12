@@ -176,6 +176,7 @@ class TournamentsController < ApplicationController
 	  	# by favouring the best latest result
 	  	players = players.order('ranking_points desc')
 	  	i = 1
+	  	cur = players.first
 	  	players.each do |p|
 	  		p.last_position = p.position
 	  		p.position = i
