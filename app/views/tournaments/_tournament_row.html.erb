@@ -1,4 +1,5 @@
-<% tournament = info[:tournament] %>
+<% tournament = info[:tournament]
+   done = info[:done] %>
 <tr>
    <td><%= link_to(tournament.name, tournament) %></td>
   	<td><%= tournament.deadline %></td>
@@ -12,5 +13,9 @@
       <% else %>
         <td class="red-text">Nej</td>
       <% end %>
+    <% end %>
+    <% if done 
+        winner = Enter.where(:tournament_id => tournament, :rank => 1).first.player %>
+    <td><%= link_to winner.name, winner %></td>
     <% end %>
 </tr>

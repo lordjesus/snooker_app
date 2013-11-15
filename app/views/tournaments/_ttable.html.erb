@@ -12,16 +12,19 @@ if tournaments.count > 0 %>
 		<% if signed_in? %>
 		<th>Tilmeldt</th>
 		<% end %>
+		<% if collapse %>
+		<th>Vinder</th>
+		<% end %>
 	</thead>
 	<% year = 5000 
 	tournaments.each do |tournament| %>
 		<% if collapse && tournament.final_date.year < year 
 			 year = tournament.final_date.year %>
 			<tr class="header warning">
-				 <th style="text-align: center;"colspan="5"><%= link_to year, "#collapse", :data => {:toggle=>"modal"} %> <span class="pull-right">+</span>
+				 <th style="text-align: center;"colspan="6"><%= link_to year, "#collapse", :data => {:toggle=>"modal"} %> <span class="pull-right">+</span>
 				</tr>
 		<% end %>
-	   		<%= render 'tournament_row', :info => { :tournament => tournament, :can_finish => false } %>	
+	   		<%= render 'tournament_row', :info => { :tournament => tournament, :done => collapse } %>	
   	<% end %>
 </table>
 <% end %>

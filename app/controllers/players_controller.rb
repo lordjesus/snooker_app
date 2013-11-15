@@ -33,6 +33,12 @@ class PlayersController < ApplicationController
       .order("tournaments.final_date DESC")
     @ranking_history = @player.rankings.includes(:tournament)
       .order("tournaments.final_date DESC")
+      max = @ranking_history.maximum(:ranking)
+      @count = 1
+      while max > 0
+        @count = @count + 1
+        max = max - 5
+      end
   end
 
   def create

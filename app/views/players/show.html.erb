@@ -1,7 +1,7 @@
 <% provide(:title, 'Profil') %>
 <h1><%= @player.name %></h1>
 
-
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 <p><strong>Navn: </strong><%= @player.name %></p>
 <p><strong>Klub: </strong><%= link_to(@player.club.name, @player.club) %></p>
@@ -61,3 +61,33 @@ end
 	</tbody>
 </table>
 <% end %>
+
+<!-- Charts! -->
+<div id="chart1" style="width: 740px; height: 500px;"></div>
+
+ <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        	['Turnering', 'Position'],
+        	<% @ranking_history.each do |ranking| %>
+        		['<%= ranking.tournament.name %>', <%= ranking.ranking %>],
+        	<% end %>
+         
+        ]);
+
+        var options = {
+       	  legend: {position: 'none'},
+          pointSize: 6,
+          title: 'Ranglisteplacering over tid',
+          hAxis: {title: 'Turnering',  direction: -1},
+          vAxis: {title: 'Position', minValue: 1,  direction: -1, gridlines: {
+          count: <%= @count %>,
+        }}
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart1'));
+        chart.draw(data, options);
+      }
+    </script>
