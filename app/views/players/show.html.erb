@@ -67,7 +67,9 @@ end
 
  <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
+      $(function() {
+    	  drawChart();
+ 	   });
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
         	['Turnering', 'Position'],
