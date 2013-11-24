@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+  require 'gchart'
   before_action :admin_user,    only: [:new, :create, :destroy]
   before_action :correct_user,  only: [:edit, :update]
 
