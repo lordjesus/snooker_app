@@ -1,0 +1,34 @@
+<table class="table table-condensed table-bordered">
+<tr class="header warning">
+				 <th style="text-align: center;"colspan="6"><%= link_to 'Vis spillere der ikke er på ranglisten', "#collapse", :data => {:toggle=>"modal"} %> <span class="pull-right">+</span>
+				</tr>
+</table>
+
+<table id="hide-able" class="table table-condensed table-bordered">
+	<thead>
+		<th>Navn</th>
+		<th>Klub</th>		
+	</thead>
+	
+	<% 	@non_ranking_players.each do |player| %>
+		<tr>
+		<td><%= link_to player.name, player %></td>
+		<td><%= link_to player.club.name, player.club %></td>
+		</tr>
+			
+		
+	   		
+  	<% end %>
+</table>
+
+
+<script>
+$(document).ready(function() {
+	$('#hide-able').slideToggle(0);
+	
+});
+$('.header').click(function(){
+   $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
+    $('#hide-able').slideToggle(0);
+});
+</script>
