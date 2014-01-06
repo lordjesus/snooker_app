@@ -36,9 +36,11 @@ class PlayersController < ApplicationController
       .order("tournaments.final_date DESC")
       max = @ranking_history.maximum(:ranking)
       @count = 1
-      while max > 0
-        @count = @count + 1
-        max = max - 5
+      if max 
+        while max > 0
+          @count = @count + 1
+          max = max - 5
+        end
       end
   end
 
