@@ -40,6 +40,12 @@ class AdminController < ApplicationController
 		redirect_to admin_users_path
 	end
 
+	def reject_user
+		@user = User.find(params[:id])
+		@user.destroy
+		redirect_to admin_users_path
+	end
+
 	private
 
   		def admin_user

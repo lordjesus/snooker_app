@@ -3,12 +3,15 @@
   	<td><%= user.email %></td>
   	<td>
   		<% if user.player == nil %>
-  			Ingen spiller
+  			Ingen spiller (<%= link_to 'Vælg...', '#' %>)
   		<% else %>
   			<%= link_to(user.player.name, user.player) %>
  		<% end %> 
   	</td>
    <td>
-      <%= link_to('Godkend', approve_user_path(user), { :class => 'btn btn-mini btn-success'}) %>
+      <%= link_to('Godkend', approve_user_path(user), { :class => 'btn btn-mini btn-success de-activated'}) %>
+   </td>
+   <td>
+      <%= link_to('Afvis', reject_user_path(user), { :class => 'btn btn-mini btn-danger'}) %>
    </td>
 </tr>
