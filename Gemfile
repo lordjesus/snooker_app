@@ -14,6 +14,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'newrelic_rpm'
 gem 'googlecharts'
+gem 'p3p'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

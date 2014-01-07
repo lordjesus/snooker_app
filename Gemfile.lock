@@ -109,6 +109,8 @@ GEM
     newrelic_rpm (3.6.9.171)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    p3p (1.0.0)
+      rack
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -215,6 +217,7 @@ DEPENDENCIES
   jquery-rails (= 3.0.4)
   jquery-ui-rails
   newrelic_rpm
+  p3p
   paperclip
   pg (= 0.15.1)
   rails (= 4.0.0)
