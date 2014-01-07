@@ -3,8 +3,8 @@
 				 <th style="text-align: center;"colspan="6"><%= link_to 'Vis spillere der ikke er på ranglisten', "#collapse", :data => {:toggle=>"modal"} %> <span class="pull-right">+</span>
 				</tr>
 </table>
-
-<table id="hide-able" class="table table-condensed table-bordered">
+<div id="hide-able">
+<table class="table table-condensed table-bordered">
 	<thead>
 		<th>Navn</th>
 		<th>Klub</th>		
@@ -20,7 +20,7 @@
 	   		
   	<% end %>
 </table>
-
+</div>
 
 <script>
 $(document).ready(function() {
@@ -29,6 +29,7 @@ $(document).ready(function() {
 });
 $('.header').click(function(){
    $(this).find('span').text(function(_, value){return value=='-'?'+':'-'});
-    $('#hide-able').slideToggle(0);
+    $('#hide-able').slideToggle(500);
+
 });
 </script>

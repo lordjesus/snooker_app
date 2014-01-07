@@ -5,7 +5,12 @@
 
 <p><strong>Navn: </strong><%= @player.name %></p>
 <p><strong>Klub: </strong><%= link_to(@player.club.name, @player.club) %></p>
-<p><strong>Rangliste placering:</strong> <%= @player.position %></p>
+<p><strong>Rangliste placering:</strong> 
+<%= if @player.ranking_points > 0
+	   @player.position
+	else
+		'Ikke på ranglisten'
+	end %></p>
 
 <% if (signed_in? && current_user.is_valid? && current_user?(@player.user)) || is_admin?(current_user) %>
 	<p><%= link_to 'Opdater oplysninger', edit_player_path(:id => @player.id), class: "btn" %></p>
