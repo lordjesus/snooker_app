@@ -151,7 +151,7 @@ class TournamentsController < ApplicationController
 	  	played = Hash.new
 
 
-	  	tournaments = Tournament.all.where(:finished => 1).order('final_date desc').limit(6).reverse
+	  	tournaments = Tournament.all.where(:finished => 1).where("max_points > 0").order('final_date desc').limit(6).reverse
 	  	players = Player.all
 	  	players.each do |player|
 	  		player.ranking_points = 0

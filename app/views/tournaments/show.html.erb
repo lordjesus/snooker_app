@@ -31,9 +31,12 @@
     </tr>
 </table>
 
+
+
 <%= if @tournament.finished == 0 
 		render 'active_tournament' 
 	else 
 		render 'finished_tournament'
 	end
 %>
+
