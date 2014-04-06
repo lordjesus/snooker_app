@@ -1,4 +1,4 @@
-<% if @tournament.deadline > DateTime.now %>
+<% if @tournament.deadline - 2.hours > DateTime.now # Hour fix for daylight saving time %> 
 <% if signed_in? && current_user.is_valid? %>
 	<% if has_joined?(@tournament) %>
 		<%= render 'leave', :info => { :player => current_user.player, :btn => "btn-large" } %>
