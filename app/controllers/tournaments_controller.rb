@@ -64,8 +64,10 @@ class TournamentsController < ApplicationController
 		
 		@tournament.finished = 1;
 		if @tournament.save
-			generate_header(@tournament)
-			update_ranking_list
+			if @tournament.max_points > 0
+				generate_header(@tournament)
+				update_ranking_list
+			end
 			flash[:success] = 'Turnering afsluttet'
 			redirect_to admin_tournaments_path
 		else
