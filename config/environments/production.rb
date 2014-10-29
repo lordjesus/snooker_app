@@ -81,6 +81,8 @@ SnookerApp::Application.configure do
   }
 }
 
+  config.action_mailer.default_url_options = { :host => 'snookerdk.herokuapp.com' }
+
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
