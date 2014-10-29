@@ -3,11 +3,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-  	user = User.find_by(:email => params[:email])
+  	@user = User.find_by(:email => params[:email])
   	# send reset to user
-  	if (user)
+  	if (@user)
   		
-      user.send_password_reset
+      @user.send_password_reset
       flash[:success] = "Email med password instruktioner er sendt"
       
   	else 
