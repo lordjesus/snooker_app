@@ -11,7 +11,6 @@
       <%= f.password_field :password %>
 
       <%= f.submit "Log ind", class: "btn btn-large btn-primary" %>
-      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
     <% end %>
     <p>Glemt password? <%= link_to "Klik her!",  new_password_reset_path %></p>
     <p>Ny bruger? <%= link_to "Registrer dig nu!", signup_path %></p>
