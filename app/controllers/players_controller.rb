@@ -22,7 +22,7 @@ class PlayersController < ApplicationController
   def index 
     @ranking_players = Player.all.where('ranking_points > 0').order('position ASC')
   	#@players = Player.find(:all, :order => "ranking_points DESC")
-    @tournaments = Tournament.all.where(:finished => 1).where("max_points > 0").order('final_date desc').limit(6).reverse
+    @tournaments = Tournament.all.where(:finished => 1).where("max_points > 0").order('final_date desc').limit(7).reverse
     @non_ranking_players = Player.all.where('ranking_points = 0').order('name')  
   end
 
