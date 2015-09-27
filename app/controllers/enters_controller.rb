@@ -10,7 +10,7 @@ class EntersController < ApplicationController
 			flash[:success] = "Du har nu tilmeldt #{@player.name}"
 		end
 		if @player.user 
-			UserMailer.user_joined_tournament(@player.user, @tournament).deliver
+		#	UserMailer.user_joined_tournament(@player.user, @tournament).deliver
 		end
 		redirect_to @tournament
 	end
@@ -25,7 +25,7 @@ class EntersController < ApplicationController
 			flash[:success] = "Du har nu afmeldt #{@player.name}"
 		end
 		if @player.user 
-			UserMailer.user_left_tournament(@player.user, @tournament).deliver
+		#	UserMailer.user_left_tournament(@player.user, @tournament).deliver
 		end
 		redirect_to @tournament
 	end

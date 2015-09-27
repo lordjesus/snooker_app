@@ -2,7 +2,9 @@
 
 <table class="table table-condensed table-striped table-bordered">
 	<thead>
-		<th>Placering</th>
+		<th>#</th>
+
+		<th>Rang</th>
 		<th>Navn</th>
 		<th>Klub</th>
 		
@@ -13,7 +15,7 @@
 	<tbody>
 	<% seed = 1 %>
 	<% @results.each do |result| %>
-   		<%= render 'fplayer_row', :info => { :enter => result } %>
+   		<%= render 'fplayer_row', :info => { :enter => result, :seed => seed } %>
    		<% seed += 1 %>	
   	<% end %>
   	</tbody>
