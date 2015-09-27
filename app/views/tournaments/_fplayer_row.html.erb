@@ -3,7 +3,13 @@
         %>
 <tr>
   <td><%= info[:seed] %></td>
-  <td><%= enter.rank %></td>
+  <%
+    points = @pointList[enter.rank]
+    if enter.lost_all == 1
+       points /= 2
+    end
+  %>
+  <td><%= points %></td>
   
    <td><%= link_to(enter.player.name, enter.player) %></td>
   	<td><%= link_to(enter.player.club.name, enter.player.club) %></td>

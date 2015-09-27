@@ -104,6 +104,23 @@ class TournamentsController < ApplicationController
 	def show
 		@tournament = Tournament.find(params[:id])
 		@players = @tournament.players.order("position ASC")
+
+		@pointList = {
+			1 => 100 * @tournament.max_points / 100,
+			2 => 80 * @tournament.max_points / 100,
+			3 => 64 * @tournament.max_points / 100,
+			4 => 50 * @tournament.max_points / 100,
+			5 => 38 * @tournament.max_points / 100,
+			6 => 28 * @tournament.max_points / 100, 
+			7 => 23 * @tournament.max_points / 100,
+			8 => 18 * @tournament.max_points / 100,
+			9 => 13 * @tournament.max_points / 100,
+			10 => 8 * @tournament.max_points / 100,
+			11 => 3 * @tournament.max_points / 100
+		}
+
+		
+
 		if is_admin?(current_user)
 			if @players.count > 0
 				@not_joined = Player.find(:all, :conditions => ['id not in (?)', @players.map(&:id)], :order => "club_id")
