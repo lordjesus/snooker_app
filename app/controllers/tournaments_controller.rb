@@ -137,7 +137,44 @@ class TournamentsController < ApplicationController
 		end			
 
 		if @tournament.finished == 1
+
 			@results = @tournament.enter.order(:rank)
+
+			@rankList = {
+			1 => "0"
+			2 =>  "0"
+			3 =>  "0"
+			4 =>  "0"
+			5 =>  "0"
+			6 =>  "0"
+			7 =>  "0"
+			8 =>  "0"
+			9 =>  "0"
+			10 =>  "0"
+			11 =>  "0"
+		}
+
+			rank = 1
+			rCount = 0
+			rStartCount = 1
+
+			@results.each do |res|
+				if res.rank > rank
+					# write current ranks and increment to next rank
+					if rStartCount == rCount
+						@rankList[rank] = rCount.to_s
+					else
+						@rankList[rank] = rStartCount.to_s + " - " + rCount.to_s
+					end
+					rank = rank + 1
+					rCount = rCount + 1
+					rStartCount = rCount
+				else
+					rCount = rCount + 1
+				end
+			end
+
+
 			@breaks = @tournament.high_break
 		end
 	end
