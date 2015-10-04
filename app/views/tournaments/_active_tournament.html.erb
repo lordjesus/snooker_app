@@ -58,6 +58,14 @@
    		<%= render 'player_row', :info => { :player => player, :join => true} %>	
   	<% end %>
 	</table>
+
+	<h3>Til kopi</h3>
+	<p>
+	spiller;klub<br>
+	<% @players.each do |player| %>
+   		<%= player.name %>;<%= player.club.name %><br>
+  	<% end %>
+  	</p>
 <% end %>
 
 <script>
