@@ -59,7 +59,7 @@
     	return ids;
     }
 
-    var getPlayerRank = function(x, id) {    	
+  /*  var getPlayerRank = function(x, id) {    	
     	switch (true) {
 			case (x == 1):
 				return "1" + createRankString(id, "1");
@@ -81,9 +81,9 @@
 			default:
 				return x;				
 		}
-    }
+    }*/
 
-/* original for normal tournament play
+/* original for normal tournament play*/
 
 var getPlayerRank = function(x, id) {     
       switch (true) {
@@ -105,11 +105,15 @@ var getPlayerRank = function(x, id) {
         return "25-32" + createRankString(id, "8");
       case (x <= 40):
         return "33-40" + createRankString(id, "9");
+        case (x <= 56):
+        return "41-56" + createRankString(id, "10");
+        case (x > 56):
+         return "57+" + createRankString(id, "11");
 
       default:
         return x;       
     }
-    }*/
+    }
 
   $(function() {
     $( ".sortable" ).sortable({
