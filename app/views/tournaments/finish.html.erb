@@ -97,18 +97,18 @@ var getPlayerRank = function(x, id) {
         return "5-8" + createRankString(id, "4");
       case (x <= 16):
         return "9-16" + createRankString(id, "5");
+      case (x <= 20):
+        return "17-20" + createRankString(id, "6");
       case (x <= 24):
-        return "17-24" + createRankString(id, "6");
+        return "21-24" + createRankString(id, "7");
       case (x <= 32):
-        return "24-32" + createRankString(id, "7");
+        return "25-32" + createRankString(id, "8");
       case (x <= 40):
-        return "32-40" + createRankString(id, "8");
-      case (x <= 48):
-        return "40-48" + createRankString(id, "9");
-        case (x <= 56):
-        return "49-56" + createRankString(id, "10");
-        case (x > 56):
-         return "57+" + createRankString(id, "11");
+        return "33-40" + createRankString(id, "9");
+        case (x <= 48):
+        return "41-48" + createRankString(id, "10");
+        case (x > 48):
+         return "48+" + createRankString(id, "11");
 
       default:
         return x;       
