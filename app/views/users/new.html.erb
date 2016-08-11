@@ -2,33 +2,7 @@
 
 <div class="row">
   <div class="span6 offset1">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', :update => @user %>
-      
-      <%= f.label :username, "Brugernavn" %>
-      <%= f.text_field :username %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label 'Vælg dig selv fra listen' %>
-      <% if User.all.count > 0
-          players = Player.find(:all, :conditions => ['id not in (?)', Player.joins(:user)]).sort_by(&:name)
-        else
-          players = Player.all.order(:name)
-        end
-        %>
-      <%= f.collection_select :player_id, players, :id, :name, include_blank: true %>
-
-      <p>(Hvis ikke du er at finde på listen, så skriv til <a href="mailto:daniel@snooker.dk">daniel@snooker.dk</a> og oplys dit navn, din klub og dit licensnr.)</p>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Bekræft password" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.submit "Opret bruger", class: "btn btn-large btn-primary" %>
-    <% end %>
+    <p>Det er ikke længere muligt at oprette brugere på snooker.dk</p>
+    <p>Hvis du ønsker at tilmelde dig til vores turneringer skal du gå ind på <a href="http://spiller.ddbu-admin.dk/?m=36">http://spiller.ddbu-admin.dk/?m=36</a> og tilmede dig med dit licensnr. Du kan få dit licensnr. oplyst fra turneringslederen i din klub.</p>
   </div>
 </div>
